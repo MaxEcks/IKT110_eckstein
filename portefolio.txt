@@ -1,0 +1,13 @@
+# Mandatory Handins - Fail / Pass
+These must be have a pass grade to be able to handin the portfolio. 
+
+Handin1 
+Handin2 
+
+# Portfolio Content -- The stuff that gets you a grade in the course (provided that you have passed the handin's)
+Dist-O-Meter
+Consulting
+Auction House 1
+Auction House 2
+Dota2  
+Hydo Power Game 
