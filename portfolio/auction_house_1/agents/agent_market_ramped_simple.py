@@ -18,12 +18,12 @@ from dnd_auction_game import AuctionGameClient
 # Average roll values per dice type (expected value)
 AVG = {2: 1.5, 3: 2.0, 4: 2.5, 6: 3.5, 8: 4.5, 10: 5.5, 12: 6.5, 20: 10.5}
 
-EMA_ALPHA        = 0.15   # smoothing factor for market price (cp)
+EMA_ALPHA        = 0.20   # smoothing factor for market price (cp)
 HARD_CAP         = 4000   # bid cap per auction (avoid overspending)
 EPSILON          = 0.10   # random +- jitter
 TOP_K            = 4      # auctions to target per round
 
-SPEND_FRAC_START = 0.20   # fraction of gold spent at game start
+SPEND_FRAC_START = 0.30   # fraction of gold spent at game start
 SPEND_FRAC_END   = 0.95   # fraction of gold spent at game end
 AGGR_START       = 0.95   # starting aggression (× cp)
 AGGR_END         = 1.20   # ending aggression (× cp)
@@ -133,6 +133,7 @@ class MarketAgent:
         if prev_auctions:
             self.update_cp(prev_auctions)
 
+        # read own state
         me = states[agent_id]
         gold = int(me["gold"])
         pts = int(me.get("points", 0))
@@ -163,11 +164,11 @@ class MarketAgent:
         scored = []
         for a_id, a in auctions.items():
             die = int(a["die"])
-            ev = a["num"] * AVG[die] + a["bonus"]
+            ev = a["num"] * AVG[die] + a["bonus"]  # expected points
             if ev <= 0:
                 continue
             value_ratio = ev / max(1.0, self.cp)
-            scored.append((value_ratio, ev, a_id))
+            scored.append((value_ratio, ev, a_id))  # sort by value_ratio
 
         if not scored:
             self._plot.update(current_round, self._last_gold, self._last_points, self.cp)
@@ -190,7 +191,7 @@ class MarketAgent:
             bid = int(min(fair, HARD_CAP, per_share))
             bid = max(bid, per_bid_floor)
 
-            # small random jitter ±EPSILON to avoid ties
+            # small random jitter +- EPSILON to avoid ties
             bid = int(bid * float(np.random.uniform(1.0 - EPSILON, 1.0 + EPSILON)))
             bid = clamp_int(bid, 1, remaining_gold)
 
@@ -212,10 +213,11 @@ def make_bid(agent_id, current_round, states, auctions, prev_auctions, bank_stat
 
 # -------------------- Standalone start --------------------
 if __name__ == "__main__":
-    host = "localhost"
-    agent_name = "{}_{}".format(os.path.basename(__file__), random.randint(1, 1000))
+    host = "opentsetlin.com"
+    # agent_name = "{}_{}".format(os.path.basename(__file__), random.randint(1, 1000))
+    agent_name = "Wolf_of_Wall_Street"
     player_id = "Maximilian Eckstein"
-    port = 8095
+    port = 8000
 
     game = AuctionGameClient(host=host,
                              agent_name=agent_name,
