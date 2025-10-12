@@ -1,7 +1,11 @@
 # Auction Game 1
 portfolio/auction_house_1/example_agents/
 portfolio/auction_house_1/guest_agents/
+portfolio/auction_house_1/prototype_agents/
 logs/
+
+# Consulting Game
+portfolio/consulting/output/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
