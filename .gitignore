@@ -6,6 +6,7 @@ logs/
 
 # Consulting Game
 portfolio/consulting/output/
+portfolio/consulting/prev_notebooks/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
