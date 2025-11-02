@@ -74,7 +74,7 @@ def predict_price(year, remodeled, house_color, month_to_marked):
 
 
 if __name__ == '__main__':
-    app.run_server(debug=True)
+    app.run(debug=True)
 
 
 
