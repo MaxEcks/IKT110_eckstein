@@ -17,7 +17,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.04146840627349388
+    "profit_per_worker": 0.04146840627349388,
+    "legacy_product_cost": 25152.0,
+    "legacy_gross_profit": 8069.5999999999985,
+    "sales_revenue": 33221.6,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -186526.737915161
   },
   {
     "product": "dinosaur",
@@ -27,8 +33,8 @@
     "qty": 0.0,
     "supplier_price": 65.0,
     "revenue": 0.0,
-    "product_cost": 0.0,
-    "gross_profit": 0.0,
+    "product_cost": 126555.0,
+    "gross_profit": -94916.25,
     "sell_through": 0.0,
     "price_cost_ratio": 1.4553846153846153,
     "gross_margin_%": 31.289640591966165,
@@ -37,7 +43,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.0
+    "profit_per_worker": 0.0,
+    "legacy_product_cost": 0.0,
+    "legacy_gross_profit": 0.0,
+    "sales_revenue": 0.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 31638.75,
+    "net_profit": -289512.58791516104
   },
   {
     "product": "gjokur_ja",
@@ -57,7 +69,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.08308167652696817
+    "profit_per_worker": 0.08308167652696817,
+    "legacy_product_cost": 40020.0,
+    "legacy_gross_profit": 16167.39,
+    "sales_revenue": 56187.39,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -178428.94791516103
   },
   {
     "product": "hammer",
@@ -77,7 +95,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.1849391431800224
+    "profit_per_worker": 0.1849391431800224,
+    "legacy_product_cost": 115020.0,
+    "legacy_gross_profit": 35988.47999999998,
+    "sales_revenue": 151008.47999999998,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -158607.85791516103
   },
   {
     "product": "hot_dogs",
@@ -97,7 +121,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09496581589349747
+    "profit_per_worker": 0.09496581589349747,
+    "legacy_product_cost": 40320.0,
+    "legacy_gross_profit": 18480.0,
+    "sales_revenue": 58800.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -176116.337915161
   },
   {
     "product": "ice_cream",
@@ -107,8 +137,8 @@
     "qty": 1814.0,
     "supplier_price": 8.0,
     "revenue": 21495.899999999998,
-    "product_cost": 14512.0,
-    "gross_profit": 6983.899999999998,
+    "product_cost": 19672.0,
+    "gross_profit": 3113.899999999998,
     "sell_through": 0.7376982513216754,
     "price_cost_ratio": 1.48125,
     "gross_margin_%": 32.48945147679325,
@@ -117,7 +147,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.7376982513216754,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.0358891645897509
+    "profit_per_worker": 0.0358891645897509,
+    "legacy_product_cost": 14512.0,
+    "legacy_gross_profit": 6983.899999999998,
+    "sales_revenue": 21495.899999999998,
+    "salvage_rate": 0.25,
+    "salvage_value": 1290.0,
+    "net_profit": -191482.43791516102
   },
   {
     "product": "knives",
@@ -127,8 +163,8 @@
     "qty": 519.0,
     "supplier_price": 38.0,
     "revenue": 28363.35,
-    "product_cost": 19722.0,
-    "gross_profit": 8641.349999999999,
+    "product_cost": 118294.0,
+    "gross_profit": -65287.65,
     "sell_through": 0.16672020558946354,
     "price_cost_ratio": 1.438157894736842,
     "gross_margin_%": 30.466605672461117,
@@ -137,7 +173,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.16672020558946354,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.04440653967377024
+    "profit_per_worker": 0.04440653967377024,
+    "legacy_product_cost": 19722.0,
+    "legacy_gross_profit": 8641.349999999999,
+    "sales_revenue": 28363.35,
+    "salvage_rate": 0.25,
+    "salvage_value": 24643.0,
+    "net_profit": -259883.987915161
   },
   {
     "product": "laderhosen",
@@ -147,8 +189,8 @@
     "qty": 189.0,
     "supplier_price": 220.0,
     "revenue": 59909.22,
-    "product_cost": 41580.0,
-    "gross_profit": 18329.22,
+    "product_cost": 493460.0,
+    "gross_profit": -320580.78,
     "sell_through": 0.08426214890771289,
     "price_cost_ratio": 1.440818181818182,
     "gross_margin_%": 30.594990220203172,
@@ -157,7 +199,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.08426214890771289,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09419098116836642
+    "profit_per_worker": 0.09419098116836642,
+    "legacy_product_cost": 41580.0,
+    "legacy_gross_profit": 18329.22,
+    "sales_revenue": 59909.22,
+    "salvage_rate": 0.25,
+    "salvage_value": 112970.0,
+    "net_profit": -515177.11791516107
   },
   {
     "product": "mattress",
@@ -177,7 +225,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 1.0254393383651301
+    "profit_per_worker": 1.0254393383651301,
+    "legacy_product_cost": 605080.0,
+    "legacy_gross_profit": 199546.74,
+    "sales_revenue": 804626.74,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": 4950.402084838977
   },
   {
     "product": "monster",
@@ -187,8 +241,8 @@
     "qty": 2032.0,
     "supplier_price": 16.0,
     "revenue": 45902.88,
-    "product_cost": 32512.0,
-    "gross_profit": 13390.879999999997,
+    "product_cost": 38320.0,
+    "gross_profit": 9034.879999999997,
     "sell_through": 0.8484342379958246,
     "price_cost_ratio": 1.411875,
     "gross_margin_%": 29.17220008853475,
@@ -197,7 +251,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.8484342379958246,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.06881362796168382
+    "profit_per_worker": 0.06881362796168382,
+    "legacy_product_cost": 32512.0,
+    "legacy_gross_profit": 13390.879999999997,
+    "sales_revenue": 45902.88,
+    "salvage_rate": 0.25,
+    "salvage_value": 1452.0,
+    "net_profit": -185561.457915161
   },
   {
     "product": "nails",
@@ -217,7 +277,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.028687487440970327
+    "profit_per_worker": 0.028687487440970327,
+    "legacy_product_cost": 13506.0,
+    "legacy_gross_profit": 5582.48,
+    "sales_revenue": 19088.48,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -189013.857915161
   },
   {
     "product": "rice_porridge",
@@ -237,7 +303,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.058149295722786556
+    "profit_per_worker": 0.058149295722786556,
+    "legacy_product_cost": 31905.0,
+    "legacy_gross_profit": 11315.64,
+    "sales_revenue": 43220.64,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -183280.69791516103
   },
   {
     "product": "sunscreen",
@@ -257,7 +329,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.2091401638695957
+    "profit_per_worker": 0.2091401638695957,
+    "legacy_product_cost": 82005.0,
+    "legacy_gross_profit": 40697.90999999999,
+    "sales_revenue": 122702.90999999999,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -153898.427915161
   },
   {
     "product": "batteries",
@@ -277,7 +355,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.041542970883267395
+    "profit_per_worker": 0.041542970883267395,
+    "legacy_product_cost": 22404.0,
+    "legacy_gross_profit": 8084.109999999997,
+    "sales_revenue": 30488.109999999997,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -186512.22791516103
   },
   {
     "product": "dinosaur",
@@ -287,8 +371,8 @@
     "qty": 448.0,
     "supplier_price": 65.0,
     "revenue": 42241.920000000006,
-    "product_cost": 29120.0,
-    "gross_profit": 13121.920000000006,
+    "product_cost": 109070.0,
+    "gross_profit": -46840.579999999994,
     "sell_through": 0.266984505363528,
     "price_cost_ratio": 1.4506153846153846,
     "gross_margin_%": 31.063739526991203,
@@ -297,7 +381,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.266984505363528,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.06743148478837677
+    "profit_per_worker": 0.06743148478837677,
+    "legacy_product_cost": 29120.0,
+    "legacy_gross_profit": 13121.920000000006,
+    "sales_revenue": 42241.920000000006,
+    "salvage_rate": 0.25,
+    "salvage_value": 19987.5,
+    "net_profit": -241436.917915161
   },
   {
     "product": "gjokur_ja",
@@ -317,7 +407,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.06934524125465907
+    "profit_per_worker": 0.06934524125465907,
+    "legacy_product_cost": 40020.0,
+    "legacy_gross_profit": 13494.330000000002,
+    "sales_revenue": 53514.33,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -181102.00791516103
   },
   {
     "product": "hammer",
@@ -337,7 +433,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.3695961638875043
+    "profit_per_worker": 0.3695961638875043,
+    "legacy_product_cost": 150255.0,
+    "legacy_gross_profit": 71922.06000000003,
+    "sales_revenue": 222177.06000000003,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -122674.27791516099
   },
   {
     "product": "hot_dogs",
@@ -347,8 +449,8 @@
     "qty": 1790.0,
     "supplier_price": 18.0,
     "revenue": 48115.2,
-    "product_cost": 32220.0,
-    "gross_profit": 15895.199999999997,
+    "product_cost": 42300.0,
+    "gross_profit": 8335.199999999997,
     "sell_through": 0.7617021276595745,
     "price_cost_ratio": 1.4933333333333332,
     "gross_margin_%": 33.035714285714285,
@@ -357,7 +459,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.7617021276595745,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.08168293489125111
+    "profit_per_worker": 0.08168293489125111,
+    "legacy_product_cost": 32220.0,
+    "legacy_gross_profit": 15895.199999999997,
+    "sales_revenue": 48115.2,
+    "salvage_rate": 0.25,
+    "salvage_value": 2520.0,
+    "net_profit": -186261.13791516103
   },
   {
     "product": "ice_cream",
@@ -377,7 +485,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.039443291082622164
+    "profit_per_worker": 0.039443291082622164,
+    "legacy_product_cost": 22912.0,
+    "legacy_gross_profit": 7675.52,
+    "sales_revenue": 30587.52,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -186920.81791516102
   },
   {
     "product": "knives",
@@ -387,8 +501,8 @@
     "qty": 904.0,
     "supplier_price": 38.0,
     "revenue": 50407.04,
-    "product_cost": 34352.0,
-    "gross_profit": 16055.04,
+    "product_cost": 100244.0,
+    "gross_profit": -33363.95999999999,
     "sell_through": 0.34268385140257773,
     "price_cost_ratio": 1.4673684210526314,
     "gross_margin_%": 31.850789096126253,
@@ -397,7 +511,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.34268385140257773,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.08250432753261566
+    "profit_per_worker": 0.08250432753261566,
+    "legacy_product_cost": 34352.0,
+    "legacy_gross_profit": 16055.04,
+    "sales_revenue": 50407.04,
+    "salvage_rate": 0.25,
+    "salvage_value": 16473.0,
+    "net_profit": -227960.297915161
   },
   {
     "product": "laderhosen",
@@ -407,8 +527,8 @@
     "qty": 345.0,
     "supplier_price": 220.0,
     "revenue": 109347.75,
-    "product_cost": 75900.0,
-    "gross_profit": 33447.75,
+    "product_cost": 370920.0,
+    "gross_profit": -187817.25,
     "sell_through": 0.20462633451957296,
     "price_cost_ratio": 1.4406818181818182,
     "gross_margin_%": 30.588420886575168,
@@ -417,7 +537,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.20462633451957296,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.17188273098223644
+    "profit_per_worker": 0.17188273098223644,
+    "legacy_product_cost": 75900.0,
+    "legacy_gross_profit": 33447.75,
+    "sales_revenue": 109347.75,
+    "salvage_rate": 0.25,
+    "salvage_value": 73755.0,
+    "net_profit": -382413.58791516104
   },
   {
     "product": "mattress",
@@ -427,8 +553,8 @@
     "qty": 745.0,
     "supplier_price": 280.0,
     "revenue": 291503.6,
-    "product_cost": 208600.0,
-    "gross_profit": 82903.59999999998,
+    "product_cost": 945840.0,
+    "gross_profit": -470026.4,
     "sell_through": 0.22054470100651272,
     "price_cost_ratio": 1.3974285714285712,
     "gross_margin_%": 28.439991821713345,
@@ -437,7 +563,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.22054470100651272,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.4260285722136447
+    "profit_per_worker": 0.4260285722136447,
+    "legacy_product_cost": 208600.0,
+    "legacy_gross_profit": 82903.59999999998,
+    "sales_revenue": 291503.6,
+    "salvage_rate": 0.25,
+    "salvage_value": 184310.0,
+    "net_profit": -664622.7379151611
   },
   {
     "product": "monster",
@@ -447,8 +579,8 @@
     "qty": 903.0,
     "supplier_price": 16.0,
     "revenue": 20759.969999999998,
-    "product_cost": 14448.0,
-    "gross_profit": 6311.9699999999975,
+    "product_cost": 34464.0,
+    "gross_profit": -8700.030000000002,
     "sell_through": 0.4192200557103064,
     "price_cost_ratio": 1.436875,
     "gross_margin_%": 30.404523705959107,
@@ -457,7 +589,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.4192200557103064,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.03243622191262332
+    "profit_per_worker": 0.03243622191262332,
+    "legacy_product_cost": 14448.0,
+    "legacy_gross_profit": 6311.9699999999975,
+    "sales_revenue": 20759.969999999998,
+    "salvage_rate": 0.25,
+    "salvage_value": 5004.0,
+    "net_profit": -203296.367915161
   },
   {
     "product": "nails",
@@ -477,7 +615,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.041524882156430555
+    "profit_per_worker": 0.041524882156430555,
+    "legacy_product_cost": 20286.0,
+    "legacy_gross_profit": 8080.59,
+    "sales_revenue": 28366.59,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -186515.74791516102
   },
   {
     "product": "rice_porridge",
@@ -497,7 +641,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.06516823561977209
+    "profit_per_worker": 0.06516823561977209,
+    "legacy_product_cost": 29265.0,
+    "legacy_gross_profit": 12681.5,
+    "sales_revenue": 41946.5,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -181914.837915161
   },
   {
     "product": "sunscreen",
@@ -517,7 +667,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.1068628023671552
+    "profit_per_worker": 0.1068628023671552,
+    "legacy_product_cost": 63455.0,
+    "legacy_gross_profit": 20795.11,
+    "sales_revenue": 84250.11,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -173801.227915161
   },
   {
     "product": "batteries",
@@ -537,7 +693,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05415029960427135
+    "profit_per_worker": 0.05415029960427135,
+    "legacy_product_cost": 32844.0,
+    "legacy_gross_profit": 10537.449999999997,
+    "sales_revenue": 43381.45,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184058.88791516103
   },
   {
     "product": "dinosaur",
@@ -547,8 +709,8 @@
     "qty": 0.0,
     "supplier_price": 65.0,
     "revenue": 0.0,
-    "product_cost": 0.0,
-    "gross_profit": 0.0,
+    "product_cost": 170560.0,
+    "gross_profit": -127920.0,
     "sell_through": 0.0,
     "price_cost_ratio": 1.4353846153846153,
     "gross_margin_%": 30.332261521972132,
@@ -557,7 +719,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.0
+    "profit_per_worker": 0.0,
+    "legacy_product_cost": 0.0,
+    "legacy_gross_profit": 0.0,
+    "sales_revenue": 0.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 42640.0,
+    "net_profit": -322516.33791516104
   },
   {
     "product": "gjokur_ja",
@@ -577,7 +745,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09598130262935861
+    "profit_per_worker": 0.09598130262935861,
+    "legacy_product_cost": 40020.0,
+    "legacy_gross_profit": 18677.61,
+    "sales_revenue": 58697.61,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -175918.727915161
   },
   {
     "product": "hammer",
@@ -597,7 +771,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.24379559506758747
+    "profit_per_worker": 0.24379559506758747,
+    "legacy_product_cost": 104805.0,
+    "legacy_gross_profit": 47441.73000000001,
+    "sales_revenue": 152246.73,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -147154.607915161
   },
   {
     "product": "hot_dogs",
@@ -617,7 +797,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.050995204258809726
+    "profit_per_worker": 0.050995204258809726,
+    "legacy_product_cost": 30744.0,
+    "legacy_gross_profit": 9923.479999999996,
+    "sales_revenue": 40667.479999999996,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184672.857915161
   },
   {
     "product": "ice_cream",
@@ -637,7 +823,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.02492955444061336
+    "profit_per_worker": 0.02492955444061336,
+    "legacy_product_cost": 15160.0,
+    "legacy_gross_profit": 4851.200000000001,
+    "sales_revenue": 20011.2,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -189745.137915161
   },
   {
     "product": "knives",
@@ -647,8 +839,8 @@
     "qty": 1356.0,
     "supplier_price": 38.0,
     "revenue": 71203.56,
-    "product_cost": 51528.0,
-    "gross_profit": 19675.559999999998,
+    "product_cost": 122968.0,
+    "gross_profit": -33904.44,
     "sell_through": 0.41903584672435107,
     "price_cost_ratio": 1.3818421052631578,
     "gross_margin_%": 27.63283184155399,
@@ -657,7 +849,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.41903584672435107,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.101109610852893
+    "profit_per_worker": 0.101109610852893,
+    "legacy_product_cost": 51528.0,
+    "legacy_gross_profit": 19675.559999999998,
+    "sales_revenue": 71203.56,
+    "salvage_rate": 0.25,
+    "salvage_value": 17860.0,
+    "net_profit": -228500.77791516102
   },
   {
     "product": "laderhosen",
@@ -667,8 +865,8 @@
     "qty": 218.0,
     "supplier_price": 220.0,
     "revenue": 65953.72,
-    "product_cost": 47960.0,
-    "gross_profit": 17993.72,
+    "product_cost": 734140.0,
+    "gross_profit": -496641.28,
     "sell_through": 0.06532813904704825,
     "price_cost_ratio": 1.3751818181818183,
     "gross_margin_%": 27.28234283070008,
@@ -677,7 +875,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.06532813904704825,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09246689939172853
+    "profit_per_worker": 0.09246689939172853,
+    "legacy_product_cost": 47960.0,
+    "legacy_gross_profit": 17993.72,
+    "sales_revenue": 65953.72,
+    "salvage_rate": 0.25,
+    "salvage_value": 171545.0,
+    "net_profit": -691237.6179151611
   },
   {
     "product": "mattress",
@@ -687,8 +891,8 @@
     "qty": 222.0,
     "supplier_price": 280.0,
     "revenue": 88795.56,
-    "product_cost": 62160.0,
-    "gross_profit": 26635.559999999998,
+    "product_cost": 574280.0,
+    "gross_profit": -357454.44,
     "sell_through": 0.10823988298391028,
     "price_cost_ratio": 1.4285,
     "gross_margin_%": 29.99649982499125,
@@ -697,7 +901,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.10823988298391028,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.13687595709849593
+    "profit_per_worker": 0.13687595709849593,
+    "legacy_product_cost": 62160.0,
+    "legacy_gross_profit": 26635.559999999998,
+    "sales_revenue": 88795.56,
+    "salvage_rate": 0.25,
+    "salvage_value": 128030.0,
+    "net_profit": -552050.777915161
   },
   {
     "product": "monster",
@@ -717,7 +927,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05148519292468882
+    "profit_per_worker": 0.05148519292468882,
+    "legacy_product_cost": 30768.0,
+    "legacy_gross_profit": 10018.830000000002,
+    "sales_revenue": 40786.83,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184577.50791516103
   },
   {
     "product": "nails",
@@ -737,7 +953,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.03357781585205733
+    "profit_per_worker": 0.03357781585205733,
+    "legacy_product_cost": 19218.0,
+    "legacy_gross_profit": 6534.119999999999,
+    "sales_revenue": 25752.12,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -188062.21791516102
   },
   {
     "product": "rice_porridge",
@@ -757,7 +979,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09144128913545015
+    "profit_per_worker": 0.09144128913545015,
+    "legacy_product_cost": 48885.0,
+    "legacy_gross_profit": 17794.14,
+    "sales_revenue": 66679.14,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -176802.19791516103
   },
   {
     "product": "sunscreen",
@@ -777,7 +1005,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.21613726368446293
+    "profit_per_worker": 0.21613726368446293,
+    "legacy_product_cost": 85190.0,
+    "legacy_gross_profit": 42059.520000000004,
+    "sales_revenue": 127249.52,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -152536.81791516102
   },
   {
     "product": "batteries",
@@ -797,7 +1031,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.04511004726012412
+    "profit_per_worker": 0.04511004726012412,
+    "legacy_product_cost": 21900.0,
+    "legacy_gross_profit": 8778.249999999996,
+    "sales_revenue": 30678.249999999996,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -185818.087915161
   },
   {
     "product": "dinosaur",
@@ -807,8 +1047,8 @@
     "qty": 175.0,
     "supplier_price": 65.0,
     "revenue": 15176.0,
-    "product_cost": 11375.0,
-    "gross_profit": 3801.0,
+    "product_cost": 184210.0,
+    "gross_profit": -125825.25,
     "sell_through": 0.061750176429075515,
     "price_cost_ratio": 1.3341538461538462,
     "gross_margin_%": 25.046125461254608,
@@ -817,7 +1057,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.061750176429075515,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.019532741678094365
+    "profit_per_worker": 0.019532741678094365,
+    "legacy_product_cost": 11375.0,
+    "legacy_gross_profit": 3801.0,
+    "sales_revenue": 15176.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 43208.75,
+    "net_profit": -320421.58791516104
   },
   {
     "product": "gjokur_ja",
@@ -837,7 +1083,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.10197725307991998
+    "profit_per_worker": 0.10197725307991998,
+    "legacy_product_cost": 40020.0,
+    "legacy_gross_profit": 19844.4,
+    "sales_revenue": 59864.4,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -174751.93791516102
   },
   {
     "product": "hammer",
@@ -857,7 +1109,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.19520228595751252
+    "profit_per_worker": 0.19520228595751252,
+    "legacy_product_cost": 110925.0,
+    "legacy_gross_profit": 37985.649999999994,
+    "sales_revenue": 148910.65,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -156610.68791516102
   },
   {
     "product": "hot_dogs",
@@ -877,7 +1135,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05321292327975119
+    "profit_per_worker": 0.05321292327975119,
+    "legacy_product_cost": 28764.0,
+    "legacy_gross_profit": 10355.04,
+    "sales_revenue": 39119.04,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184241.297915161
   },
   {
     "product": "ice_cream",
@@ -897,7 +1161,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.033278889363392586
+    "profit_per_worker": 0.033278889363392586,
+    "legacy_product_cost": 14760.0,
+    "legacy_gross_profit": 6475.950000000001,
+    "sales_revenue": 21235.95,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -188120.387915161
   },
   {
     "product": "knives",
@@ -907,8 +1177,8 @@
     "qty": 482.0,
     "supplier_price": 38.0,
     "revenue": 27237.82,
-    "product_cost": 18316.0,
-    "gross_profit": 8921.82,
+    "product_cost": 103968.0,
+    "gross_profit": -55317.18,
     "sell_through": 0.17616959064327486,
     "price_cost_ratio": 1.4871052631578947,
     "gross_margin_%": 32.755264554946024,
@@ -917,7 +1187,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.17616959064327486,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.04584783092829672
+    "profit_per_worker": 0.04584783092829672,
+    "legacy_product_cost": 18316.0,
+    "legacy_gross_profit": 8921.82,
+    "sales_revenue": 27237.82,
+    "salvage_rate": 0.25,
+    "salvage_value": 21413.0,
+    "net_profit": -249913.517915161
   },
   {
     "product": "laderhosen",
@@ -927,8 +1203,8 @@
     "qty": 113.0,
     "supplier_price": 220.0,
     "revenue": 36033.44,
-    "product_cost": 24860.0,
-    "gross_profit": 11173.440000000002,
+    "product_cost": 622820.0,
+    "gross_profit": -437296.56,
     "sell_through": 0.03991522430236665,
     "price_cost_ratio": 1.4494545454545453,
     "gross_margin_%": 31.008529854490718,
@@ -937,7 +1213,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.03991522430236665,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05741855226932037
+    "profit_per_worker": 0.05741855226932037,
+    "legacy_product_cost": 24860.0,
+    "legacy_gross_profit": 11173.440000000002,
+    "sales_revenue": 36033.44,
+    "salvage_rate": 0.25,
+    "salvage_value": 149490.0,
+    "net_profit": -631892.897915161
   },
   {
     "product": "mattress",
@@ -947,8 +1229,8 @@
     "qty": 1160.0,
     "supplier_price": 280.0,
     "revenue": 449465.2,
-    "product_cost": 324800.0,
-    "gross_profit": 124665.20000000001,
+    "product_cost": 897680.0,
+    "gross_profit": -304994.80000000005,
     "sell_through": 0.3618215845290081,
     "price_cost_ratio": 1.3838214285714288,
     "gross_margin_%": 27.736340878003464,
@@ -957,7 +1239,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.3618215845290081,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.6406348718358247
+    "profit_per_worker": 0.6406348718358247,
+    "legacy_product_cost": 324800.0,
+    "legacy_gross_profit": 124665.20000000001,
+    "sales_revenue": 449465.2,
+    "salvage_rate": 0.25,
+    "salvage_value": 143220.0,
+    "net_profit": -499591.1379151611
   },
   {
     "product": "monster",
@@ -977,7 +1265,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.06580021051363477
+    "profit_per_worker": 0.06580021051363477,
+    "legacy_product_cost": 41472.0,
+    "legacy_gross_profit": 12804.480000000003,
+    "sales_revenue": 54276.48,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -181791.857915161
   },
   {
     "product": "nails",
@@ -997,7 +1291,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.026497518171426343
+    "profit_per_worker": 0.026497518171426343,
+    "legacy_product_cost": 14874.0,
+    "legacy_gross_profit": 5156.32,
+    "sales_revenue": 20030.32,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -189440.017915161
   },
   {
     "product": "rice_porridge",
@@ -1017,7 +1317,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.10493722656231466
+    "profit_per_worker": 0.10493722656231466,
+    "legacy_product_cost": 42840.0,
+    "legacy_gross_profit": 20420.399999999994,
+    "sales_revenue": 63260.399999999994,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -174175.93791516102
   },
   {
     "product": "sunscreen",
@@ -1037,7 +1343,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.08888635924660121
+    "profit_per_worker": 0.08888635924660121,
+    "legacy_product_cost": 53480.0,
+    "legacy_gross_profit": 17296.960000000006,
+    "sales_revenue": 70776.96,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -177299.37791516102
   },
   {
     "product": "batteries",
@@ -1057,7 +1369,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09537820803232065
+    "profit_per_worker": 0.09537820803232065,
+    "legacy_product_cost": 39420.0,
+    "legacy_gross_profit": 18560.249999999993,
+    "sales_revenue": 57980.24999999999,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -176036.087915161
   },
   {
     "product": "dinosaur",
@@ -1067,8 +1385,8 @@
     "qty": 0.0,
     "supplier_price": 65.0,
     "revenue": 0.0,
-    "product_cost": 0.0,
-    "gross_profit": 0.0,
+    "product_cost": 29120.0,
+    "gross_profit": -21840.0,
     "sell_through": 0.0,
     "price_cost_ratio": 1.2555384615384615,
     "gross_margin_%": 20.352897929175345,
@@ -1077,7 +1395,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.0
+    "profit_per_worker": 0.0,
+    "legacy_product_cost": 0.0,
+    "legacy_gross_profit": 0.0,
+    "sales_revenue": 0.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 7280.0,
+    "net_profit": -216436.337915161
   },
   {
     "product": "gjokur_ja",
@@ -1087,8 +1411,8 @@
     "qty": 17.0,
     "supplier_price": 580.0,
     "revenue": 15486.66,
-    "product_cost": 9860.0,
-    "gross_profit": 5626.66,
+    "product_cost": 48140.0,
+    "gross_profit": -23083.34,
     "sell_through": 0.20481927710843373,
     "price_cost_ratio": 1.5706551724137932,
     "gross_margin_%": 36.3323014775297,
@@ -1097,7 +1421,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.20481927710843373,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.028914521518144286
+    "profit_per_worker": 0.028914521518144286,
+    "legacy_product_cost": 9860.0,
+    "legacy_gross_profit": 5626.66,
+    "sales_revenue": 15486.66,
+    "salvage_rate": 0.25,
+    "salvage_value": 9570.0,
+    "net_profit": -217679.677915161
   },
   {
     "product": "hammer",
@@ -1117,7 +1447,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.37949845711997043
+    "profit_per_worker": 0.37949845711997043,
+    "legacy_product_cost": 180315.0,
+    "legacy_gross_profit": 73849.01000000001,
+    "sales_revenue": 254164.01,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -120747.327915161
   },
   {
     "product": "hot_dogs",
@@ -1137,7 +1473,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.10636171380071711
+    "profit_per_worker": 0.10636171380071711,
+    "legacy_product_cost": 48384.0,
+    "legacy_gross_profit": 20697.59999999999,
+    "sales_revenue": 69081.59999999999,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -173898.737915161
   },
   {
     "product": "ice_cream",
@@ -1157,7 +1499,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.07223840977998587
+    "profit_per_worker": 0.07223840977998587,
+    "legacy_product_cost": 27496.0,
+    "legacy_gross_profit": 14057.330000000002,
+    "sales_revenue": 41553.33,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -180539.00791516103
   },
   {
     "product": "knives",
@@ -1177,7 +1525,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.12898269447877667
+    "profit_per_worker": 0.12898269447877667,
+    "legacy_product_cost": 51528.0,
+    "legacy_gross_profit": 25099.559999999998,
+    "sales_revenue": 76627.56,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -169496.77791516102
   },
   {
     "product": "laderhosen",
@@ -1197,7 +1551,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.14661889481414084
+    "profit_per_worker": 0.14661889481414084,
+    "legacy_product_cost": 75900.0,
+    "legacy_gross_profit": 28531.5,
+    "sales_revenue": 104431.5,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -166064.837915161
   },
   {
     "product": "mattress",
@@ -1207,8 +1567,8 @@
     "qty": 2.0,
     "supplier_price": 280.0,
     "revenue": 813.68,
-    "product_cost": 560.0,
-    "gross_profit": 253.67999999999995,
+    "product_cost": 726320.0,
+    "gross_profit": -544066.3200000001,
     "sell_through": 0.0007710100231303007,
     "price_cost_ratio": 1.4529999999999998,
     "gross_margin_%": 31.176875430144523,
@@ -1217,7 +1577,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.0007710100231303007,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.0013036216545380104
+    "profit_per_worker": 0.0013036216545380104,
+    "legacy_product_cost": 560.0,
+    "legacy_gross_profit": 253.67999999999995,
+    "sales_revenue": 813.68,
+    "salvage_rate": 0.25,
+    "salvage_value": 181440.0,
+    "net_profit": -738662.6579151611
   },
   {
     "product": "monster",
@@ -1237,7 +1603,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09576177126274767
+    "profit_per_worker": 0.09576177126274767,
+    "legacy_product_cost": 49776.0,
+    "legacy_gross_profit": 18634.89,
+    "sales_revenue": 68410.89,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -175961.44791516103
   },
   {
     "product": "nails",
@@ -1257,7 +1629,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05171649224142943
+    "profit_per_worker": 0.05171649224142943,
+    "legacy_product_cost": 24348.0,
+    "legacy_gross_profit": 10063.840000000004,
+    "sales_revenue": 34411.840000000004,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184532.49791516102
   },
   {
     "product": "rice_porridge",
@@ -1277,7 +1655,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.16600959887582306
+    "profit_per_worker": 0.16600959887582306,
+    "legacy_product_cost": 58665.0,
+    "legacy_gross_profit": 32304.86,
+    "sales_revenue": 90969.86,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -162291.477915161
   },
   {
     "product": "sunscreen",
@@ -1297,7 +1681,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.20474403797552593
+    "profit_per_worker": 0.20474403797552593,
+    "legacy_product_cost": 102235.0,
+    "legacy_gross_profit": 39842.44,
+    "sales_revenue": 142077.44,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -154753.897915161
   },
   {
     "product": "batteries",
@@ -1317,7 +1707,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.07155982558146112
+    "profit_per_worker": 0.07155982558146112,
+    "legacy_product_cost": 38592.0,
+    "legacy_gross_profit": 13925.279999999992,
+    "sales_revenue": 52517.27999999999,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -180671.057915161
   },
   {
     "product": "dinosaur",
@@ -1327,8 +1723,8 @@
     "qty": 253.0,
     "supplier_price": 65.0,
     "revenue": 22663.739999999998,
-    "product_cost": 16445.0,
-    "gross_profit": 6218.739999999998,
+    "product_cost": 31460.0,
+    "gross_profit": -5042.510000000002,
     "sell_through": 0.5227272727272727,
     "price_cost_ratio": 1.378153846153846,
     "gross_margin_%": 27.43916052690333,
@@ -1337,7 +1733,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.5227272727272727,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.03195712759358919
+    "profit_per_worker": 0.03195712759358919,
+    "legacy_product_cost": 16445.0,
+    "legacy_gross_profit": 6218.739999999998,
+    "sales_revenue": 22663.739999999998,
+    "salvage_rate": 0.25,
+    "salvage_value": 3753.75,
+    "net_profit": -199638.84791516102
   },
   {
     "product": "gjokur_ja",
@@ -1357,7 +1759,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.16116952834782255
+    "profit_per_worker": 0.16116952834782255,
+    "legacy_product_cost": 58000.0,
+    "legacy_gross_profit": 31363.0,
+    "sales_revenue": 89363.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -163233.337915161
   },
   {
     "product": "hammer",
@@ -1367,8 +1775,8 @@
     "qty": 3415.0,
     "supplier_price": 45.0,
     "revenue": 234064.10000000003,
-    "product_cost": 153675.0,
-    "gross_profit": 80389.10000000003,
+    "product_cost": 177165.0,
+    "gross_profit": 62771.600000000035,
     "sell_through": 0.8674117348234697,
     "price_cost_ratio": 1.5231111111111113,
     "gross_margin_%": 34.34490808287132,
@@ -1377,7 +1785,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.8674117348234697,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.41310695186385066
+    "profit_per_worker": 0.41310695186385066,
+    "legacy_product_cost": 153675.0,
+    "legacy_gross_profit": 80389.10000000003,
+    "sales_revenue": 234064.10000000003,
+    "salvage_rate": 0.25,
+    "salvage_value": 5872.5,
+    "net_profit": -131824.73791516098
   },
   {
     "product": "hot_dogs",
@@ -1397,7 +1811,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.13955123868692426
+    "profit_per_worker": 0.13955123868692426,
+    "legacy_product_cost": 54072.0,
+    "legacy_gross_profit": 27156.160000000003,
+    "sales_revenue": 81228.16,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -167440.177915161
   },
   {
     "product": "ice_cream",
@@ -1417,7 +1837,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.052323697912748435
+    "profit_per_worker": 0.052323697912748435,
+    "legacy_product_cost": 27152.0,
+    "legacy_gross_profit": 10182.0,
+    "sales_revenue": 37334.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184414.337915161
   },
   {
     "product": "knives",
@@ -1437,7 +1863,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09938850960510891
+    "profit_per_worker": 0.09938850960510891,
+    "legacy_product_cost": 61864.0,
+    "legacy_gross_profit": 19340.64,
+    "sales_revenue": 81204.64,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -175255.69791516103
   },
   {
     "product": "laderhosen",
@@ -1457,7 +1889,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.17253870427221513
+    "profit_per_worker": 0.17253870427221513,
+    "legacy_product_cost": 91080.0,
+    "legacy_gross_profit": 33575.40000000001,
+    "sales_revenue": 124655.40000000001,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -161020.93791516102
   },
   {
     "product": "mattress",
@@ -1467,8 +1905,8 @@
     "qty": 1255.0,
     "supplier_price": 280.0,
     "revenue": 467286.69999999995,
-    "product_cost": 351400.0,
-    "gross_profit": 115886.69999999995,
+    "product_cost": 726320.0,
+    "gross_profit": -165303.30000000005,
     "sell_through": 0.4838087895142637,
     "price_cost_ratio": 1.3297857142857141,
     "gross_margin_%": 24.79991405704463,
@@ -1477,7 +1915,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.4838087895142637,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.5955235398649874
+    "profit_per_worker": 0.5955235398649874,
+    "legacy_product_cost": 351400.0,
+    "legacy_gross_profit": 115886.69999999995,
+    "sales_revenue": 467286.69999999995,
+    "salvage_rate": 0.25,
+    "salvage_value": 93730.0,
+    "net_profit": -359899.6379151611
   },
   {
     "product": "monster",
@@ -1497,7 +1941,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.0890472564162779
+    "profit_per_worker": 0.0890472564162779,
+    "legacy_product_cost": 49776.0,
+    "legacy_gross_profit": 17328.270000000004,
+    "sales_revenue": 67104.27,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -177268.06791516102
   },
   {
     "product": "nails",
@@ -1517,7 +1967,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05632829536997163
+    "profit_per_worker": 0.05632829536997163,
+    "legacy_product_cost": 24912.0,
+    "legacy_gross_profit": 10961.279999999999,
+    "sales_revenue": 35873.28,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -183635.057915161
   },
   {
     "product": "rice_porridge",
@@ -1537,7 +1993,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.11681694652399176
+    "profit_per_worker": 0.11681694652399176,
+    "legacy_product_cost": 56175.0,
+    "legacy_gross_profit": 22732.149999999994,
+    "sales_revenue": 78907.15,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -171864.18791516102
   },
   {
     "product": "sunscreen",
@@ -1557,7 +2019,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.29050469605777535
+    "profit_per_worker": 0.29050469605777535,
+    "legacy_product_cost": 104965.0,
+    "legacy_gross_profit": 56531.149999999994,
+    "sales_revenue": 161496.15,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -138065.18791516102
   },
   {
     "product": "batteries",
@@ -1577,7 +2045,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.09456293061394931
+    "profit_per_worker": 0.09456293061394931,
+    "legacy_product_cost": 41664.0,
+    "legacy_gross_profit": 18401.600000000006,
+    "sales_revenue": 60065.600000000006,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -176194.737915161
   },
   {
     "product": "dinosaur",
@@ -1587,8 +2061,8 @@
     "qty": 205.0,
     "supplier_price": 65.0,
     "revenue": 17783.75,
-    "product_cost": 13325.0,
-    "gross_profit": 4458.75,
+    "product_cost": 39325.0,
+    "gross_profit": -15041.25,
     "sell_through": 0.33884297520661155,
     "price_cost_ratio": 1.3346153846153845,
     "gross_margin_%": 25.072046109510087,
@@ -1597,7 +2071,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.33884297520661155,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.022912815563589383
+    "profit_per_worker": 0.022912815563589383,
+    "legacy_product_cost": 13325.0,
+    "legacy_gross_profit": 4458.75,
+    "sales_revenue": 17783.75,
+    "salvage_rate": 0.25,
+    "salvage_value": 6500.0,
+    "net_profit": -209637.587915161
   },
   {
     "product": "gjokur_ja",
@@ -1617,7 +2097,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.1389255331813403
+    "profit_per_worker": 0.1389255331813403,
+    "legacy_product_cost": 54520.0,
+    "legacy_gross_profit": 27034.40000000001,
+    "sales_revenue": 81554.40000000001,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -167561.93791516102
   },
   {
     "product": "hammer",
@@ -1627,8 +2113,8 @@
     "qty": 2994.0,
     "supplier_price": 45.0,
     "revenue": 186107.03999999998,
-    "product_cost": 134730.0,
-    "gross_profit": 51377.03999999998,
+    "product_cost": 196740.0,
+    "gross_profit": 4869.539999999979,
     "sell_through": 0.6848124428179323,
     "price_cost_ratio": 1.3813333333333333,
     "gross_margin_%": 27.6061776061776,
@@ -1637,7 +2123,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.6848124428179323,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.26401853472905046
+    "profit_per_worker": 0.26401853472905046,
+    "legacy_product_cost": 134730.0,
+    "legacy_gross_profit": 51377.03999999998,
+    "sales_revenue": 186107.03999999998,
+    "salvage_rate": 0.25,
+    "salvage_value": 15502.5,
+    "net_profit": -189726.79791516103
   },
   {
     "product": "hot_dogs",
@@ -1657,7 +2149,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.11967547924850029
+    "profit_per_worker": 0.11967547924850029,
+    "legacy_product_cost": 58302.0,
+    "legacy_gross_profit": 23288.410000000003,
+    "sales_revenue": 81590.41,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -171307.927915161
   },
   {
     "product": "ice_cream",
@@ -1677,7 +2175,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.07249057279870307
+    "profit_per_worker": 0.07249057279870307,
+    "legacy_product_cost": 29312.0,
+    "legacy_gross_profit": 14106.400000000001,
+    "sales_revenue": 43418.4,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -180489.93791516102
   },
   {
     "product": "knives",
@@ -1697,7 +2201,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.14753658937054023
+    "profit_per_worker": 0.14753658937054023,
+    "legacy_product_cost": 69578.0,
+    "legacy_gross_profit": 28710.08,
+    "sales_revenue": 98288.08,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -165886.25791516103
   },
   {
     "product": "laderhosen",
@@ -1717,7 +2227,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.19421023234505372
+    "profit_per_worker": 0.19421023234505372,
+    "legacy_product_cost": 102520.0,
+    "legacy_gross_profit": 37792.600000000006,
+    "sales_revenue": 140312.6,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -156803.737915161
   },
   {
     "product": "mattress",
@@ -1727,8 +2243,8 @@
     "qty": 1338.0,
     "supplier_price": 280.0,
     "revenue": 458331.9,
-    "product_cost": 374640.0,
-    "gross_profit": 83691.90000000002,
+    "product_cost": 817040.0,
+    "gross_profit": -248108.09999999998,
     "sell_through": 0.4585332419465387,
     "price_cost_ratio": 1.2233928571428572,
     "gross_margin_%": 18.2601080134287,
@@ -1737,7 +2253,13 @@
     "D_out_est": 8.0,
     "TAST_norm": 0.4585332419465387,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.43007952203338756
+    "profit_per_worker": 0.43007952203338756,
+    "legacy_product_cost": 374640.0,
+    "legacy_gross_profit": 83691.90000000002,
+    "sales_revenue": 458331.9,
+    "salvage_rate": 0.25,
+    "salvage_value": 110600.0,
+    "net_profit": -442704.437915161
   },
   {
     "product": "monster",
@@ -1757,7 +2279,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.10216070976971425
+    "profit_per_worker": 0.10216070976971425,
+    "legacy_product_cost": 57312.0,
+    "legacy_gross_profit": 19880.100000000006,
+    "sales_revenue": 77192.1,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -174716.237915161
   },
   {
     "product": "nails",
@@ -1777,7 +2305,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.05407116142436013
+    "profit_per_worker": 0.05407116142436013,
+    "legacy_product_cost": 27330.0,
+    "legacy_gross_profit": 10522.050000000003,
+    "sales_revenue": 37852.05,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -184074.287915161
   },
   {
     "product": "rice_porridge",
@@ -1797,7 +2331,13 @@
     "D_out_est": 3.0,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.1632888385281601
+    "profit_per_worker": 0.1632888385281601,
+    "legacy_product_cost": 61185.0,
+    "legacy_gross_profit": 31775.410000000003,
+    "sales_revenue": 92960.41,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -162820.927915161
   },
   {
     "product": "sunscreen",
@@ -1807,8 +2347,8 @@
     "qty": 3329.0,
     "supplier_price": 35.0,
     "revenue": 158693.43,
-    "product_cost": 116515.0,
-    "gross_profit": 42178.42999999999,
+    "product_cost": 117005.0,
+    "gross_profit": 41810.92999999999,
     "sell_through": 0.9958121447801376,
     "price_cost_ratio": 1.362,
     "gross_margin_%": 26.57856093979442,
@@ -1817,6 +2357,350 @@
     "D_out_est": 3.1256356565958727,
     "TAST_norm": 1.0,
     "version_staff_cost": 194596.337915161,
-    "profit_per_worker": 0.21674832348792042
+    "profit_per_worker": 0.21674832348792042,
+    "legacy_product_cost": 116515.0,
+    "legacy_gross_profit": 42178.42999999999,
+    "sales_revenue": 158693.43,
+    "salvage_rate": 0.25,
+    "salvage_value": 122.5,
+    "net_profit": -152785.40791516102
+  },
+  {
+    "product": "batteries",
+    "amount": 3681,
+    "price": 17.12,
+    "version": 7,
+    "qty": 3681.0,
+    "supplier_price": 12.0,
+    "revenue": 63018.72,
+    "product_cost": 44172.0,
+    "gross_profit": 18846.72,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.4266666666666667,
+    "gross_margin_%": 29.90654205607477,
+    "profit_per_stock_unit": 5.12,
+    "demand_supply_index": 1.4266666666666667,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.10356698240414478,
+    "legacy_product_cost": 44172.0,
+    "legacy_gross_profit": 18846.72,
+    "sales_revenue": 63018.72,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -163129.42299946767
+  },
+  {
+    "product": "dinosaur",
+    "amount": 300,
+    "price": 80.15,
+    "version": 7,
+    "qty": 189.0,
+    "supplier_price": 65.0,
+    "revenue": 15148.35,
+    "product_cost": 19500.0,
+    "gross_profit": -2547.9000000000015,
+    "sell_through": 0.63,
+    "price_cost_ratio": 1.2330769230769232,
+    "gross_margin_%": 18.902058640049912,
+    "profit_per_stock_unit": 9.544500000000001,
+    "demand_supply_index": 0.7768384615384616,
+    "D_out_est": 8.0,
+    "TAST_norm": 0.63,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.01573475485744511,
+    "legacy_product_cost": 12285.0,
+    "legacy_gross_profit": 2863.3500000000004,
+    "sales_revenue": 15148.35,
+    "salvage_rate": 0.25,
+    "salvage_value": 1803.75,
+    "net_profit": -184524.04299946767
+  },
+  {
+    "product": "gjokur_ja",
+    "amount": 100,
+    "price": 866.82,
+    "version": 7,
+    "qty": 100.0,
+    "supplier_price": 580.0,
+    "revenue": 86682.0,
+    "product_cost": 58000.0,
+    "gross_profit": 28682.0,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.4945172413793104,
+    "gross_margin_%": 33.08876121916892,
+    "profit_per_stock_unit": 286.82,
+    "demand_supply_index": 1.4945172413793104,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.15761406702681846,
+    "legacy_product_cost": 58000.0,
+    "legacy_gross_profit": 28682.0,
+    "sales_revenue": 86682.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -153294.14299946767
+  },
+  {
+    "product": "hammer",
+    "amount": 4000,
+    "price": 60.26,
+    "version": 7,
+    "qty": 2951.0,
+    "supplier_price": 45.0,
+    "revenue": 177827.25999999998,
+    "product_cost": 180000.0,
+    "gross_profit": 9628.50999999998,
+    "sell_through": 0.73775,
+    "price_cost_ratio": 1.3391111111111111,
+    "gross_margin_%": 25.323597743113176,
+    "profit_per_stock_unit": 11.258064999999995,
+    "demand_supply_index": 0.9879292222222222,
+    "D_out_est": 8.0,
+    "TAST_norm": 0.73775,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.24746243797535433,
+    "legacy_product_cost": 132795.0,
+    "legacy_gross_profit": 45032.25999999998,
+    "sales_revenue": 177827.25999999998,
+    "salvage_rate": 0.25,
+    "salvage_value": 11801.25,
+    "net_profit": -172347.6329994677
+  },
+  {
+    "product": "hot_dogs",
+    "amount": 3391,
+    "price": 26.23,
+    "version": 7,
+    "qty": 3391.0,
+    "supplier_price": 18.0,
+    "revenue": 88945.93000000001,
+    "product_cost": 61038.0,
+    "gross_profit": 27907.930000000008,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.4572222222222222,
+    "gross_margin_%": 31.37628669462448,
+    "profit_per_stock_unit": 8.230000000000002,
+    "demand_supply_index": 1.4572222222222222,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.1533603775747772,
+    "legacy_product_cost": 61038.0,
+    "legacy_gross_profit": 27907.930000000008,
+    "sales_revenue": 88945.93000000001,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -154068.21299946768
+  },
+  {
+    "product": "ice_cream",
+    "amount": 3859,
+    "price": 11.73,
+    "version": 7,
+    "qty": 3859.0,
+    "supplier_price": 8.0,
+    "revenue": 45266.07,
+    "product_cost": 30872.0,
+    "gross_profit": 14394.07,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.46625,
+    "gross_margin_%": 31.798806479113388,
+    "profit_per_stock_unit": 3.73,
+    "demand_supply_index": 1.46625,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.07909866514778317,
+    "legacy_product_cost": 30872.0,
+    "legacy_gross_profit": 14394.07,
+    "sales_revenue": 45266.07,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -167582.07299946767
+  },
+  {
+    "product": "knives",
+    "amount": 2000,
+    "price": 48.38,
+    "version": 7,
+    "qty": 2000.0,
+    "supplier_price": 38.0,
+    "revenue": 96760.0,
+    "product_cost": 76000.0,
+    "gross_profit": 20760.0,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.2731578947368423,
+    "gross_margin_%": 21.45514675485738,
+    "profit_per_stock_unit": 10.38,
+    "demand_supply_index": 1.2731578947368423,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.11408088806487524,
+    "legacy_product_cost": 76000.0,
+    "legacy_gross_profit": 20760.0,
+    "sales_revenue": 96760.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -161216.14299946767
+  },
+  {
+    "product": "laderhosen",
+    "amount": 500,
+    "price": 292.07,
+    "version": 7,
+    "qty": 500.0,
+    "supplier_price": 220.0,
+    "revenue": 146035.0,
+    "product_cost": 110000.0,
+    "gross_profit": 36035.0,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.327590909090909,
+    "gross_margin_%": 24.675591467798814,
+    "profit_per_stock_unit": 72.07,
+    "demand_supply_index": 1.327590909090909,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.19802046249603944,
+    "legacy_product_cost": 110000.0,
+    "legacy_gross_profit": 36035.0,
+    "sales_revenue": 146035.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -145941.14299946767
+  },
+  {
+    "product": "mattress",
+    "amount": 1800,
+    "price": 316.49,
+    "version": 7,
+    "qty": 1335.0,
+    "supplier_price": 280.0,
+    "revenue": 422514.15,
+    "product_cost": 504000.0,
+    "gross_profit": -48935.84999999998,
+    "sell_through": 0.7416666666666667,
+    "price_cost_ratio": 1.1303214285714287,
+    "gross_margin_%": 11.529590192423143,
+    "profit_per_stock_unit": 27.06341666666668,
+    "demand_supply_index": 0.8383217261904763,
+    "D_out_est": 8.0,
+    "TAST_norm": 0.7416666666666667,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.2676952549771457,
+    "legacy_product_cost": 373800.0,
+    "legacy_gross_profit": 48714.15000000002,
+    "sales_revenue": 422514.15,
+    "salvage_rate": 0.25,
+    "salvage_value": 32550.0,
+    "net_profit": -230911.99299946765
+  },
+  {
+    "product": "monster",
+    "amount": 4000,
+    "price": 21.33,
+    "version": 7,
+    "qty": 4000.0,
+    "supplier_price": 16.0,
+    "revenue": 85320.0,
+    "product_cost": 64000.0,
+    "gross_profit": 21320.0,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.333125,
+    "gross_margin_%": 24.98827941865916,
+    "profit_per_stock_unit": 5.33,
+    "demand_supply_index": 1.333125,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.11715821452519942,
+    "legacy_product_cost": 64000.0,
+    "legacy_gross_profit": 21320.0,
+    "sales_revenue": 85320.0,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -160656.14299946767
+  },
+  {
+    "product": "nails",
+    "amount": 4796,
+    "price": 8.38,
+    "version": 7,
+    "qty": 4677.0,
+    "supplier_price": 6.0,
+    "revenue": 39193.26,
+    "product_cost": 28776.0,
+    "gross_profit": 10595.760000000002,
+    "sell_through": 0.9751876563803169,
+    "price_cost_ratio": 1.3966666666666667,
+    "gross_margin_%": 28.400954653937955,
+    "profit_per_stock_unit": 2.3209466221851547,
+    "demand_supply_index": 1.362012093411176,
+    "D_out_est": 3.744370308590493,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.061168787383478966,
+    "legacy_product_cost": 28062.0,
+    "legacy_gross_profit": 11131.260000000002,
+    "sales_revenue": 39193.26,
+    "salvage_rate": 0.25,
+    "salvage_value": 178.5,
+    "net_profit": -171380.38299946766
+  },
+  {
+    "product": "rice_porridge",
+    "amount": 4303,
+    "price": 22.56,
+    "version": 7,
+    "qty": 4303.0,
+    "supplier_price": 15.0,
+    "revenue": 97075.68,
+    "product_cost": 64545.0,
+    "gross_profit": 32530.679999999993,
+    "sell_through": 1.0,
+    "price_cost_ratio": 1.504,
+    "gross_margin_%": 33.51063829787233,
+    "profit_per_stock_unit": 7.559999999999999,
+    "demand_supply_index": 1.504,
+    "D_out_est": 3.0,
+    "TAST_norm": 1.0,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.17876343274346218,
+    "legacy_product_cost": 64545.0,
+    "legacy_gross_profit": 32530.679999999993,
+    "sales_revenue": 97075.68,
+    "salvage_rate": 0.25,
+    "salvage_value": 0.0,
+    "net_profit": -149445.46299946768
+  },
+  {
+    "product": "sunscreen",
+    "amount": 3476,
+    "price": 52.23,
+    "version": 7,
+    "qty": 2892.0,
+    "supplier_price": 35.0,
+    "revenue": 151049.16,
+    "product_cost": 121660.0,
+    "gross_profit": 34499.16,
+    "sell_through": 0.8319907940161104,
+    "price_cost_ratio": 1.4922857142857142,
+    "gross_margin_%": 32.98870381007084,
+    "profit_per_stock_unit": 14.335201380897585,
+    "demand_supply_index": 1.2415679763274698,
+    "D_out_est": 8.0,
+    "TAST_norm": 0.8319907940161104,
+    "version_staff_cost": 181976.14299946767,
+    "profit_per_worker": 0.2738224867209421,
+    "legacy_product_cost": 101220.0,
+    "legacy_gross_profit": 49829.16,
+    "sales_revenue": 151049.16,
+    "salvage_rate": 0.25,
+    "salvage_value": 5110.0,
+    "net_profit": -147476.98299946767
   }
 ]
