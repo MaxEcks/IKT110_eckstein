@@ -2,6 +2,7 @@
 portfolio/auction_house_1/example_agents/
 portfolio/auction_house_1/guest_agents/
 portfolio/auction_house_1/prototype_agents/
+portfolio/auction_house_1/feedback/
 logs/
 
 # Consulting Game
@@ -9,8 +10,18 @@ portfolio/consulting/output/
 portfolio/consulting/prev_notebooks/
 
 # Dota 2
-portfolio/dota_2/dota-oracle/
-portfolio/dota_2/dota_games.zip
+portfolio/dota_2/data/dota_games.zip
+portfolio/dota_2/data/sample_matches.csv
+portfolio/dota_2/data/analysis_dataset.jsonl
+portfolio/dota_2/data/training_dataset.npz
+
+# Auction Game 2
+portfolio/auction_house_2/example_agents/
+portfolio/auction_house_2/guest_agents/
+portfolio/auction_house_2/feedback/
+
+# examples
+portfolio/examples/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
