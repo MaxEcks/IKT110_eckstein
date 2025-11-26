@@ -35,9 +35,6 @@ MAX_MATCHES = 2_000_000
 # Minimum match duration in seconds (to filter out remakes / non-games)
 MIN_DURATION = 600  # 10 minutes
 
-# Hero vector size (upper bound on hero_id; safe margin)
-NUM_HEROES = 122
-
 # Lobby types we consider "serious 5v5"
 # 0 - Public matchmaking
 # 7 - Ranked
@@ -51,6 +48,24 @@ ALLOWED_LOBBY_TYPES = {0, 7}
 # 16 - Captains Draft
 # 22 - Ranked Matchmaking
 ALLOWED_GAME_MODES = {1, 2, 3, 4, 16, 22}
+
+# ========================================
+# HERO INDEX MAPPING (compact feature space)
+# ========================================
+
+# Mapping file created e.g. by hero_index_mapping.py from heroes.json
+MAPPING_PATH = Path(DEFAULT_OUT_DIR) / "hero_index_mapping.json"
+
+with open(MAPPING_PATH, "r", encoding="utf-8") as f:
+    _mapping = json.load(f)
+
+# hero_id_to_index: maps Valve hero_id -> compact feature index (0..N-1)
+# index_to_hero_id: inverse mapping (not used here, but useful for analysis)
+HERO_ID_TO_INDEX = {int(k): int(v) for k, v in _mapping["hero_id_to_index"].items()}
+INDEX_TO_HERO_ID = {int(k): int(v) for k, v in _mapping["index_to_hero_id"].items()}
+
+# Number of hero-features = size of compact hero universe
+NUM_HEROES = len(HERO_ID_TO_INDEX)
 
 
 # ========================================
@@ -147,6 +162,9 @@ def build_training_xy(m: dict):
        -1 if hero picked by Dire
         0 if not picked
 
+    Uses a compact hero index mapping:
+      hero_id  -> HERO_ID_TO_INDEX[hero_id]  -> feature index 0..NUM_HEROES-1
+
     y: 1.0 if Radiant wins, else 0.0
     """
     x = np.zeros(NUM_HEROES, dtype=np.float32)
@@ -155,11 +173,14 @@ def build_training_xy(m: dict):
         hero_id = p.get("hero_id", 0)
         if hero_id <= 0:
             continue
-        if hero_id > NUM_HEROES:
-            # ignore extremely new heroes above our vector size
+
+        # Map Valve hero_id to compact feature index.
+        # If the hero is not in our mapping (e.g. new hero outside our universe),
+        # we simply ignore it.
+        idx = HERO_ID_TO_INDEX.get(hero_id)
+        if idx is None:
             continue
 
-        idx = hero_id - 1  # hero_id is 1-based
         if p.get("player_slot", 0) < 128:
             x[idx] = 1.0
         else:
