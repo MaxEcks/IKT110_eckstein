@@ -6,7 +6,7 @@ from numba import njit
 def sigmoid(z):
     """
     Numerically stable sigmoid function.
-    Computes σ(z) = 1 / (1 + exp(-z))
+    Computes sigma(z) = 1 / (1 + exp(-z))
     """
     return 1 / (1 + np.exp(-z))
 

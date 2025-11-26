@@ -15,7 +15,7 @@ def train_model(xs, ys, learning_rate, batch_size, iterations):
     Parameters
     ----------
     xs : 2D array
-        Feature matrix (samples × features).
+        Feature matrix (samples x features).
     ys : 1D array
         Labels (0 = Dire win, 1 = Radiant win).
     learning_rate : float

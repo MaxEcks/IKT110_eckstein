@@ -36,7 +36,7 @@ MAX_MATCHES = 2_000_000
 MIN_DURATION = 600  # 10 minutes
 
 # Hero vector size (upper bound on hero_id; safe margin)
-NUM_HEROES = 136
+NUM_HEROES = 122
 
 # Lobby types we consider "serious 5v5"
 # 0 - Public matchmaking
