@@ -19,6 +19,7 @@ portfolio/dota_2/data/training_dataset.npz
 portfolio/auction_house_2/example_agents/
 portfolio/auction_house_2/guest_agents/
 portfolio/auction_house_2/feedback/
+portfolio/auction_house_2/prototype_agents/
 
 # examples
 portfolio/examples/
