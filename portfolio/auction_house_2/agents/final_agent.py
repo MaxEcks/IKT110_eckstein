@@ -1,57 +1,32 @@
-# agent_dr_stockmann_autark_pool.py
+# agent_wolf_pulsed_cap_pool.py
 """
-Dr. Stockmann - autonomous, learning Wolf with safe pool logic
-and step-limited cp adaptation.
+Pulsed Wolf Agent with:
+- Piecewise (pulsed) ramp for spending and aggression
+- Cap as percentage of own gold, tied to the pulses
+- cp (market price) with stronger weight to follow current prices
+- Simple, structured logic (no plots)
+- Configurable assumed total rounds
+- Conservative, occasional pool usage when profitable and safe
 
-Core behaviour:
----------------
-- Auction logic:
-  * Wolf-style ramp:
-      - cp learned from last round's winners
-      - spend_frac ramp from start to end
-      - aggression ramp from start to end
-      - Top-K=3 auctions chosen by expected value (EV)
-  * No static HARD_CAP.
-    Instead, a dynamic per-auction cap:
-
-        fair_price = EV * cp_safe * aggression
-
-        per_auction_cap = min(
-            CAP_EV_MULT   * fair_price,   # at most 2x "fair value"
-            CAP_GOLD_FRAC * current_gold, # at most 30% of our gold
-            share_cap,                    # our share of the round budget
-            remaining_gold
-        )
-
-- cp:
-  * Estimated as EMA of median(winning_bid / reward_points).
-  * Step-limited: per round cp can only move by factors
-      CP_STEP_DOWN <= cp_new / cp_old <= CP_STEP_UP
-    then clamped to [CP_MIN, CP_MAX].
-  * This allows cp to grow with the market, but prevents single-round explosions.
-
-- Pool logic:
-  * cp_pool is estimated ONLY when the pool actually decreases
-    between rounds and prev_pool_buys is non-empty.
-    This protects us from the current auction_house.py bug where
-    the pool never decreases and payouts are capped to 1 gold.
-  * cp_pool_sample ≈ (pool_before - pool_after) / total_points_bid_prev
-  * We invest a small, capped fraction of our surplus points into the
-    pool only if:
-        cp_pool is known AND
-        cp_pool / cp > POOL_RATIO_THRESHOLD AND
-        we are not in the endgame.
+Compatible with dnd_auction_game pool API:
+    make_bid(agent_id, states, auctions, prev_auctions, pool_gold, prev_pool_buys)
+Return format:
+    {"bids": {...}, "pool": points_for_pool}
 """
 
 import os
+import random
+import statistics
 from typing import Dict, Any
 
-import numpy as np
 from dnd_auction_game import AuctionGameClient
 
 
-# -------------------- Dice EV table --------------------
+# ------------------------------------------------------------
+# Configuration
+# ------------------------------------------------------------
 
+# Expected value per die
 AVG = {
     2: 1.5,
     3: 2.0,
@@ -63,165 +38,98 @@ AVG = {
     20: 10.5,
 }
 
+# Market price learning
+EMA_ALPHA = 0.25          # higher weight on recent rounds -> track fast price growth
+CP_MIN    = 1.0           # safety bounds for cp
+CP_MAX    = 1e9
 
-# -------------------- Hyperparameters --------------------
+# Bidding behaviour
+EPSILON   = 0.10          # random +- jitter on bids
+TOP_K     = 6             # number of main target auctions
+ENDGAME_RATIO = 0.10      # last 10% of rounds -> full flush
 
-EMA_ALPHA        = 0.20   # smoothing for cp and cp_pool
-EPSILON          = 0.10   # random +- jitter on bids
-TOP_K            = 3      # number of auctions to target per round (focus)
-
-# Spending and aggression ramps (Wolf-style)
-SPEND_FRAC_START = 0.30
-SPEND_FRAC_END   = 0.95
-
-AGGR_START       = 0.95
-AGGR_END         = 1.20
-
-ENDGAME_RATIO    = 0.10   # last 10 % of rounds = gold flush
-
-# Assumed total number of rounds (for ramping); override via env var if needed.
+# Assumed total rounds (can be overridden via env var)
 ASSUMED_TOTAL_ROUNDS = int(os.environ.get("ASSUMED_TOTAL_ROUNDS", "500"))
 
-# cp handling: clamp + step-limit to avoid insane jumps
-CP_MIN       = 3.0
-CP_MAX       = 5000.0
-CP_STEP_UP   = 1.30   # per round cp can increase by at most +30%
-CP_STEP_DOWN = 0.70   # per round cp can decrease to at most 70% of previous
+# ---- Pulses (4 blocks) ----
+# Each block: (end_progress, spend_start, spend_end, cap_start, cap_end, aggr_start, aggr_end)
+# - spend_*: fraction of gold to spend per round
+# - cap_*:   fraction of gold allowed per auction
+# - aggr_*:  multiplicative factor on cp * EV
 
-# Dynamic auction cap components
-CAP_EV_MULT   = 2.0   # we pay at most 2x fair price EV * cp
-CAP_GOLD_FRAC = 0.30  # at most 30 % of current gold per auction
+PULSE_BLOCKS = [
+    # end,   spend_start, spend_end,  cap_start, cap_end,   aggr_start, aggr_end
+    (0.25,   0.03,        0.06,      0.02,      0.04,      0.95,       1.00),  # early
+    (0.50,   0.06,        0.08,      0.04,      0.06,      1.00,       1.10),  # mid1
+    (0.80,   0.08,        0.10,      0.06,      0.08,      1.10,       1.20),  # mid2
+    (0.90,   0.10,        0.12,      0.08,      0.10,      1.20,       1.30),  # late (before endgame)
+]
 
-# Safety / buffer: minimum "burn" per bid (slightly higher now)
-MIN_PER_BID_FLOOR_FRAC = 0.05   # ~5 % of gold / remaining rounds
+# How much we are willing to overpay relative to cp * EV
+FAIR_MULT = 1.5
 
-# Pool strategy (conservative, bug-safe)
-POOL_RATIO_THRESHOLD = 1.20   # cp_pool must be 20 % better than cp
-POOL_POINTS_FRAC     = 0.10   # max 10 % of surplus points to pool
-POOL_POINTS_ABS_MAX  = 50     # never bid more than 50 points on pool
-MIN_POINTS_KEEP      = 100    # always keep at least this many points
+# ------------------------------------------------------------
+# Pool strategy (very conservative)
+# ------------------------------------------------------------
+
+POOL_RATIO_THRESHOLD = 1.20   # pool_price (gold/point) must be 20% better than cp
+POOL_MAX_SURPLUS_FRAC = 0.05  # max 5% of surplus points
+POOL_POINTS_ABS_MAX   = 40    # never invest more than 40 points per round
+MIN_POINTS_KEEP       = 300   # keep at least this many points
+LEAD_POINTS_MIN       = 200   # only use pool if we lead by >= 200 points
 
 
-# ---------------- Utility helpers ----------------
+# ------------------------------------------------------------
+# Utilities
+# ------------------------------------------------------------
+
+def clamp_int(x: float, lo: int, hi: int) -> int:
+    return int(max(lo, min(hi, int(x))))
+
 
 def lerp(a: float, b: float, t: float) -> float:
-    """Linear interpolation between a and b by t ∈ [0,1]."""
+    """Linear interpolation between a and b by t ∈ [0, 1]."""
     t = 0.0 if t < 0 else 1.0 if t > 1 else t
     return a + (b - a) * t
 
 
-def clamp_int(x: float, lo: int, hi: int) -> int:
-    """Clamp x to integer range [lo, hi] and return int."""
-    return int(max(lo, min(hi, int(x))))
-
-
-# ---------------- Optional live plotting ----------------
-
-class LivePlot:
+def piecewise_pulse(progress: float):
     """
-    Optional live plot; disabled automatically on headless servers.
-    Shows gold, points and cp over rounds.
+    Map game progress ∈ [0,1] to:
+      spend_frac, cap_frac, aggression
+    using the configured PULSE_BLOCKS.
     """
+    prev_end = 0.0
+    last_vals = (PULSE_BLOCKS[-1][1], PULSE_BLOCKS[-1][3], PULSE_BLOCKS[-1][5])
+
+    for end_p, s_start, s_end, c_start, c_end, a_start, a_end in PULSE_BLOCKS:
+        width = max(1e-9, end_p - prev_end)
+        if progress <= end_p:
+            t = (progress - prev_end) / width
+            spend = lerp(s_start, s_end, t)
+            cap = lerp(c_start, c_end, t)
+            aggr = lerp(a_start, a_end, t)
+            return spend, cap, aggr
+        prev_end = end_p
+        last_vals = (s_end, c_end, a_end)
+
+    # after last block
+    return last_vals
+
+
+# ------------------------------------------------------------
+# Pulsed Wolf Agent
+# ------------------------------------------------------------
+
+class PulsedWolfAgent:
     def __init__(self):
-        self.enabled = False
-        try:
-            import matplotlib.pyplot as plt
-            from matplotlib.ticker import FuncFormatter
+        self.cp = 30.0          # gold per point
+        self.cp_pool = None     # gold per point in pool (approx.)
+        self.round_counter = 0
 
-            self.plt = plt
-            self.enabled = True
-
-            self.fig, (self.ax_money, self.ax_cp) = plt.subplots(2, 1, figsize=(7, 6))
-            self.ax_points = self.ax_money.twinx()
-
-            try:
-                self.fig.canvas.manager.set_window_title("Dr. Stockmann - Autark Wolf (Pool)")
-            except Exception:
-                pass
-
-            self.rounds = []
-            self.money_left = []
-            self.points = []
-            self.cp_hist = []
-
-            self.initial_gold = None
-            self.format_thousands = FuncFormatter(lambda x, _: f"{int(x / 1_000)}k")
-
-            self.plt.ion()
-            self.fig.tight_layout()
-
-        except Exception:
-            self.enabled = False
-
-    def update(self, rnd: int, money_left: int, points: int, cp: float):
-        if not self.enabled:
-            return
-
-        if self.initial_gold is None:
-            self.initial_gold = max(1, money_left)
-
-        self.rounds.append(rnd)
-        self.money_left.append(money_left)
-        self.points.append(points)
-        self.cp_hist.append(cp)
-
-        # Money & points
-        self.ax_money.cla()
-        self.ax_points.cla()
-
-        self.ax_money.set_title("Gold (left) & Points (right)")
-        self.ax_money.set_xlabel("Round")
-        self.ax_money.plot(self.rounds, self.money_left, label="gold")
-        self.ax_money.set_ylabel("Gold")
-        self.ax_money.yaxis.set_major_formatter(self.format_thousands)
-
-        self.ax_points.plot(self.rounds, self.points, linestyle="--", label="points")
-        self.ax_points.set_ylabel("Points")
-
-        self.ax_money.legend(loc="upper right")
-        self.ax_points.legend(loc="upper left")
-
-        # cp
-        self.ax_cp.cla()
-        self.ax_cp.set_title("Market price cp (EMA, step-limited)")
-        self.ax_cp.set_xlabel("Round")
-        self.ax_cp.set_ylabel("Gold per point")
-        self.ax_cp.plot(self.rounds, self.cp_hist, label="cp")
-        self.ax_cp.legend(loc="best")
-
-        self.fig.tight_layout()
-        self.plt.pause(0.001)
-
-
-# ---------------- Main agent ----------------
-
-class MarketAgent:
-    def __init__(self):
-        self.cp = 30.0   # initial market estimate (gold per point)
-
-        self.cp_pool = None          # pool price estimate (points -> gold)
-        self._last_pool_gold = None  # pool value at previous round
-
-        self._plot = LivePlot()
-        self._round_counter = 0
-
-        self._last_gold = 0
-        self._last_points = 0
-
-    # ----- learn cp from previous auctions (step-limited) -----
+    # ----- Learn market price cp from previous auctions -----
 
     def update_cp(self, prev_auctions: Dict[str, Any]):
-        """
-        Update cp from previous winners:
-
-            samples = winning_bid / reward_points
-
-        cp_raw  := EMA(self.cp, median(samples))
-        cp_step := limited so that:
-             CP_STEP_DOWN <= cp_step / cp_old <= CP_STEP_UP
-
-        Finally clamped to [CP_MIN, CP_MAX].
-        """
         samples = []
         for a in prev_auctions.values():
             reward = int(a.get("reward", 0))
@@ -229,102 +137,69 @@ class MarketAgent:
             if reward > 0 and bids:
                 win_gold = int(bids[0]["gold"])
                 samples.append(win_gold / reward)
-
         if not samples:
             return
+        est = statistics.median(samples)
+        cp_new = (1.0 - EMA_ALPHA) * self.cp + EMA_ALPHA * est
+        self.cp = float(min(CP_MAX, max(CP_MIN, cp_new)))
 
-        est = float(np.median(np.array(samples, dtype=np.float64)))
-
-        # EMA update
-        cp_old = self.cp
-        cp_raw = (1 - EMA_ALPHA) * cp_old + EMA_ALPHA * est
-
-        # Step-limit: cp cannot jump arbitrarily in one round
-        upper = cp_old * CP_STEP_UP
-        lower = cp_old * CP_STEP_DOWN
-        cp_limited = min(upper, max(lower, cp_raw))
-
-        # Global clamp to avoid completely insane values
-        self.cp = float(max(CP_MIN, min(CP_MAX, cp_limited)))
-
-    # ----- learn cp_pool (only if pool actually decreases) -----
+    # ----- Rough pool price estimate (gold per point) -----
 
     def update_cp_pool(self, pool_gold: int, prev_pool_buys: Dict[str, Any]):
-        """
-        Estimate cp_pool only in rounds where:
-          - we know the previous pool value (_last_pool_gold not None),
-          - prev_pool_buys is non-empty,
-          - pool has *decreased* (pool_gold < _last_pool_gold).
-
-        Then we approximate:
-            payout ≈ _last_pool_gold - pool_gold
-            cp_pool_sample ≈ payout / total_points
-        """
-        if self._last_pool_gold is None:
+        if pool_gold <= 0 or not prev_pool_buys:
             return
-        if not prev_pool_buys:
-            return
-
-        prev_pool = int(self._last_pool_gold)
-        curr_pool = int(pool_gold)
-
-        if curr_pool >= prev_pool:
-            # nothing paid out (or bugged pool never decreases)
-            return
-
-        total_points = int(sum(int(v) for v in prev_pool_buys.values()))
+        total_points = sum(int(v) for v in prev_pool_buys.values())
         if total_points <= 0:
             return
-
-        payout = prev_pool - curr_pool
-        sample = payout / total_points
-
+        sample = pool_gold / total_points
         if self.cp_pool is None:
             self.cp_pool = float(sample)
         else:
-            self.cp_pool = (1 - EMA_ALPHA) * self.cp_pool + EMA_ALPHA * float(sample)
+            self.cp_pool = (1.0 - EMA_ALPHA) * self.cp_pool + EMA_ALPHA * float(sample)
 
-    # ----- decide pool points (conservative, bug-safe) -----
+    # ----- Decide how many points to invest in the pool -----
 
-    def decide_pool_points(self, points: int, progress: float, pool_gold: int) -> int:
-        """
-        Decide how many points to invest into the pool.
-
-        Conditions:
-          - not in endgame (progress < 1 - ENDGAME_RATIO)
-          - cp_pool known and cp_pool / cp > POOL_RATIO_THRESHOLD
-          - keep MIN_POINTS_KEEP points as safety buffer
-          - cap by POOL_POINTS_FRAC and POOL_POINTS_ABS_MAX
-
-        If the auction_house pool bug is present (pool never decreases),
-        cp_pool will never be learned and this function returns 0.
-        """
+    def decide_pool_points(
+        self,
+        agent_id: str,
+        states: Dict[str, Any],
+        points: int,
+        progress: float,
+        pool_gold: int,
+    ) -> int:
+        # Endgame: keep all points
         if progress >= (1.0 - ENDGAME_RATIO):
             return 0
-
         if pool_gold <= 0:
             return 0
         if self.cp_pool is None or self.cp <= 0:
             return 0
 
-        ratio = self.cp_pool / max(self.cp, 1e-9)
+        # Pool must be significantly better than auctions
+        ratio = self.cp_pool / self.cp
         if ratio < POOL_RATIO_THRESHOLD:
+            return 0
+
+        # Compute our lead
+        others_points = [int(st.get("points", 0)) for aid, st in states.items() if aid != agent_id]
+        if not others_points:
+            return 0
+        max_other = max(others_points)
+        lead = points - max_other
+        if lead < LEAD_POINTS_MIN:
             return 0
 
         if points <= MIN_POINTS_KEEP:
             return 0
 
         surplus = points - MIN_POINTS_KEEP
-        max_by_frac = int(surplus * POOL_POINTS_FRAC)
-        max_by_abs  = POOL_POINTS_ABS_MAX
-        pool_bid = min(max_by_frac, max_by_abs)
-
+        max_by_frac = int(surplus * POOL_MAX_SURPLUS_FRAC)
+        pool_bid = min(max_by_frac, POOL_POINTS_ABS_MAX)
         if pool_bid <= 0:
             return 0
-
         return pool_bid
 
-    # ----- main decision -----
+    # ----- Main decision -----
 
     def decide(
         self,
@@ -336,113 +211,111 @@ class MarketAgent:
         prev_pool_buys: Dict[str, Any],
     ) -> (Dict[str, int], int):
 
-        # 1) Round counter
-        self._round_counter += 1
-        current_round = self._round_counter
+        # 1) Round + progress
+        self.round_counter += 1
+        current_round = self.round_counter
 
-        # 2) Update cp from previous round
+        total_rounds = max(1, ASSUMED_TOTAL_ROUNDS)
+        progress = current_round / total_rounds
+        if progress < 0.0:
+            progress = 0.0
+        if progress > 1.0:
+            progress = 1.0
+
+        # 2) Update cp & cp_pool from last round
         if prev_auctions:
             self.update_cp(prev_auctions)
-
-        cp_safe = self.cp  # already step-limited & clamped
-
-        # 3) Update cp_pool (bug-safe)
         if prev_pool_buys:
-            self.update_cp_pool(pool_gold=pool_gold, prev_pool_buys=prev_pool_buys)
+            self.update_cp_pool(pool_gold, prev_pool_buys)
 
-        # 4) Read our own state
+        # 3) Read own state
         me = states[agent_id]
         gold = int(me["gold"])
         points = int(me.get("points", 0))
-        self._last_gold = gold
-        self._last_points = points
 
-        # 5) Progress and endgame detection
-        total = max(1, ASSUMED_TOTAL_ROUNDS)
-        progress = current_round / total
-        progress = 0.0 if progress < 0 else 1.0 if progress > 1 else progress
+        if gold <= 0 or not auctions:
+            return {}, 0
 
-        rem_rounds = max(1, total - current_round)
-        endgame = current_round >= int((1.0 - ENDGAME_RATIO) * total)
+        endgame = progress >= (1.0 - ENDGAME_RATIO)
 
-        # 6) Spending & aggression ramps
-        spend_frac = lerp(SPEND_FRAC_START, SPEND_FRAC_END, progress)
-        aggression = lerp(AGGR_START, AGGR_END, progress)
+        # 4) Get pulsed parameters
+        spend_frac, cap_frac, aggression = piecewise_pulse(progress)
 
-        # 7) Round budget
+        # 5) Round budget
         if endgame:
-            round_budget = gold  # true flush
+            round_budget = gold   # full flush in endgame
         else:
             round_budget = clamp_int(gold * spend_frac, 1, gold)
 
+        # 6) Score auctions by value_ratio = EV / cp
+        scored = []
+        for a_id, a in auctions.items():
+            die = int(a["die"])
+            num = int(a["num"])
+            bonus = int(a["bonus"])
+            ev = num * AVG[die] + bonus
+            if ev <= 0:
+                continue
+            value_ratio = ev / max(1.0, self.cp)
+            scored.append((value_ratio, ev, a_id))
+
+        if not scored:
+            return {}, 0
+
+        scored.sort(reverse=True)
+        targets = scored[:TOP_K]
+
         bids: Dict[str, int] = {}
 
-        # 8) Auction bidding
-        if auctions and round_budget > 0 and gold > 0:
-            scored = []
-            for a_id, a in auctions.items():
-                die = int(a["die"])
-                ev = a["num"] * AVG[die] + a["bonus"]
-                if ev <= 0:
+        # 7) Main bids on targets
+        if round_budget > 0 and targets:
+            per_share = max(1, round_budget // len(targets))
+            remaining_gold = gold
+
+            for _, ev, a_id in targets:
+                fair_price = ev * self.cp * aggression
+                fair_price *= FAIR_MULT  # allow some overpaying relative to cp
+
+                # Cap linked to own gold; in endgame we ignore cap_frac
+                if endgame:
+                    cap_by_gold = remaining_gold  # effectively only limited by remaining gold + budget
+                else:
+                    cap_by_gold = cap_frac * remaining_gold
+
+                cap_by_budget = per_share
+
+                max_bid = min(fair_price, cap_by_gold, cap_by_budget, remaining_gold)
+                bid = int(max(1, max_bid))
+
+                # Add jitter
+                bid = int(bid * random.uniform(1.0 - EPSILON, 1.0 + EPSILON))
+                bid = clamp_int(bid, 1, remaining_gold)
+
+                if bid <= 0:
                     continue
-                value_ratio = ev / max(1.0, cp_safe)
-                scored.append((value_ratio, ev, a_id))
 
-            if scored:
-                scored.sort(reverse=True)
-                targets = scored[: max(1, TOP_K)]
+                bids[a_id] = bid
+                remaining_gold -= bid
+                if remaining_gold <= 0:
+                    break
 
-                targets_left = len(targets)
-                per_share = max(1, round(round_budget / targets_left))
+            gold = remaining_gold  # remaining gold after main bids
 
-                # Minimum burn per round (slightly higher now)
-                burn_min = int(MIN_PER_BID_FLOOR_FRAC * gold / max(1, rem_rounds))
-                per_bid_floor = max(1, burn_min)
-
-                remaining_gold = gold
-
-                for _, ev, a_id in targets:
-                    fair_price = ev * cp_safe * aggression
-
-                    value_cap = CAP_EV_MULT * fair_price
-                    gold_cap  = CAP_GOLD_FRAC * gold
-                    share_cap = per_share
-
-                    per_auction_cap = min(value_cap, gold_cap, share_cap, remaining_gold)
-
-                    if per_auction_cap < 1:
-                        continue
-
-                    bid = int(per_auction_cap * float(
-                        np.random.uniform(1.0 - EPSILON, 1.0 + EPSILON)
-                    ))
-
-                    bid = max(bid, per_bid_floor)
-                    bid = clamp_int(bid, 1, remaining_gold)
-
-                    if bid > 0:
-                        bids[a_id] = bid
-                        remaining_gold -= bid
-                        if remaining_gold <= 0:
-                            break
-
-        # 9) Pool bidding (safe & conservative)
+        # 8) Pool decision (conservative, based on lead and pool quality)
         pool_points = self.decide_pool_points(
+            agent_id=agent_id,
+            states=states,
             points=points,
             progress=progress,
             pool_gold=pool_gold,
         )
 
-        # 10) Remember current pool for next cp_pool estimation
-        self._last_pool_gold = int(pool_gold)
-
-        # 11) Live plot update
-        self._plot.update(current_round, gold, points, self.cp)
-
         return bids, pool_points
 
 
-# ---------------- API hook ----------------
+# ------------------------------------------------------------
+# API hook
+# ------------------------------------------------------------
 
 def make_bid(
     agent_id: str,
@@ -453,13 +326,10 @@ def make_bid(
     prev_pool_buys: Dict[str, Any],
 ) -> Dict[str, Any]:
     """
-    Callback entry point for dnd_auction_game.
-
-    Must return:
-        {"bids": {auction_id: gold}, "pool": points_for_pool}
+    Entry point for dnd_auction_game.
     """
     if not hasattr(make_bid, "_agent"):
-        make_bid._agent = MarketAgent()
+        make_bid._agent = PulsedWolfAgent()
 
     bids, pool_points = make_bid._agent.decide(
         agent_id=agent_id,
@@ -469,15 +339,16 @@ def make_bid(
         pool_gold=pool_gold,
         prev_pool_buys=prev_pool_buys,
     )
-
     return {"bids": bids, "pool": pool_points}
 
 
-# ---------------- Standalone launcher ----------------
+# ------------------------------------------------------------
+# Standalone start
+# ------------------------------------------------------------
 
 if __name__ == "__main__":
     host = "localhost"
-    agent_name = "Dr_Stockmann_Autark_Wolf_Pool_v2"
+    agent_name = "Wolf_of_Wall_Street_Pulsed_Cap_Pool"
     player_id = "Maximilian Eckstein"
     port = 8000
 
@@ -490,5 +361,5 @@ if __name__ == "__main__":
     try:
         game.run(make_bid)
     except KeyboardInterrupt:
-        print("<interrupt - shutting down>")
-    print("<game is done>")
+        print("<interrupt>")
+    print("<game done>")
