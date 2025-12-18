@@ -47,7 +47,7 @@ AGGR_END         = 1.20   # ending aggression (× cp)
 ENDGAME_RATIO    = 0.10   # last 10% of rounds trigger full flush
 
 # Assumed total number of rounds (needed since new API does not pass current_round)
-ASSUMED_TOTAL_ROUNDS = int(os.environ.get("ASSUMED_TOTAL_ROUNDS", "500"))
+ASSUMED_TOTAL_ROUNDS = int(os.environ.get("ASSUMED_TOTAL_ROUNDS", "1000"))
 
 
 # -------------------- Small utility functions --------------------
@@ -161,15 +161,17 @@ class MarketAgent:
             # EMA ... exponential moving average
             self.cp = (1 - EMA_ALPHA) * self.cp + EMA_ALPHA * est
 
-    def decide(
-        self,
-        agent_id: str,
-        states: Dict[str, Any],
-        auctions: Dict[str, Any],
-        prev_auctions: Dict[str, Any],
-        pool_gold: int,
-        prev_pool_buys: Dict[str, Any],
-    ) -> Dict[str, int]:
+def make_bid(
+    agent_id: str,
+    round: int,
+    states: Dict[str, Any],
+    auctions: Dict[str, Any],
+    prev_auctions: Dict[str, Any],
+    pool_gold: int,
+    prev_pool_buys: Dict[str, Any],
+    bank_state: Dict,
+) -> Dict[str, Any]:
+
         """
         Main bidding logic.
 

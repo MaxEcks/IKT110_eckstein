@@ -39,14 +39,14 @@ AVG = {
 }
 
 # Market price learning
-EMA_ALPHA = 0.25          # higher weight on recent rounds -> track fast price growth
-CP_MIN    = 1.0           # safety bounds for cp
-CP_MAX    = 1e9
+EMA_ALPHA = 0.25  # higher weight on recent rounds -> track fast price growth
+CP_MIN = 1.0  # safety bounds for cp
+CP_MAX = 1e9
 
 # Bidding behaviour
-EPSILON   = 0.10          # random +- jitter on bids
-TOP_K     = 6             # number of main target auctions
-ENDGAME_RATIO = 0.10      # last 10% of rounds -> full flush
+EPSILON = 0.10  # random +- jitter on bids
+TOP_K = 6  # number of main target auctions
+ENDGAME_RATIO = 0.10  # last 10% of rounds -> full flush
 
 # Assumed total rounds (can be overridden via env var)
 ASSUMED_TOTAL_ROUNDS = int(os.environ.get("ASSUMED_TOTAL_ROUNDS", "500"))
@@ -59,10 +59,10 @@ ASSUMED_TOTAL_ROUNDS = int(os.environ.get("ASSUMED_TOTAL_ROUNDS", "500"))
 
 PULSE_BLOCKS = [
     # end,   spend_start, spend_end,  cap_start, cap_end,   aggr_start, aggr_end
-    (0.25,   0.03,        0.06,      0.02,      0.04,      0.95,       1.00),  # early
-    (0.50,   0.06,        0.08,      0.04,      0.06,      1.00,       1.10),  # mid1
-    (0.80,   0.08,        0.10,      0.06,      0.08,      1.10,       1.20),  # mid2
-    (0.90,   0.10,        0.12,      0.08,      0.10,      1.20,       1.30),  # late (before endgame)
+    (0.25, 0.03, 0.06, 0.02, 0.04, 0.95, 1.00),  # early
+    (0.50, 0.06, 0.08, 0.04, 0.06, 1.00, 1.10),  # mid1
+    (0.80, 0.08, 0.10, 0.06, 0.08, 1.10, 1.20),  # mid2
+    (0.90, 0.10, 0.12, 0.08, 0.10, 1.20, 1.30),  # late (before endgame)
 ]
 
 # How much we are willing to overpay relative to cp * EV
@@ -72,16 +72,17 @@ FAIR_MULT = 1.5
 # Pool strategy (very conservative)
 # ------------------------------------------------------------
 
-POOL_RATIO_THRESHOLD = 1.20   # pool_price (gold/point) must be 20% better than cp
+POOL_RATIO_THRESHOLD = 1.20  # pool_price (gold/point) must be 20% better than cp
 POOL_MAX_SURPLUS_FRAC = 0.05  # max 5% of surplus points
-POOL_POINTS_ABS_MAX   = 40    # never invest more than 40 points per round
-MIN_POINTS_KEEP       = 300   # keep at least this many points
-LEAD_POINTS_MIN       = 200   # only use pool if we lead by >= 200 points
+POOL_POINTS_ABS_MAX = 40  # never invest more than 40 points per round
+MIN_POINTS_KEEP = 300  # keep at least this many points
+LEAD_POINTS_MIN = 200  # only use pool if we lead by >= 200 points
 
 
 # ------------------------------------------------------------
 # Utilities
 # ------------------------------------------------------------
+
 
 def clamp_int(x: float, lo: int, hi: int) -> int:
     return int(max(lo, min(hi, int(x))))
@@ -121,10 +122,11 @@ def piecewise_pulse(progress: float):
 # Pulsed Wolf Agent
 # ------------------------------------------------------------
 
+
 class PulsedWolfAgent:
     def __init__(self):
-        self.cp = 30.0          # gold per point
-        self.cp_pool = None     # gold per point in pool (approx.)
+        self.cp = 30.0  # gold per point
+        self.cp_pool = None  # gold per point in pool (approx.)
         self.round_counter = 0
 
     # ----- Learn market price cp from previous auctions -----
@@ -181,7 +183,9 @@ class PulsedWolfAgent:
             return 0
 
         # Compute our lead
-        others_points = [int(st.get("points", 0)) for aid, st in states.items() if aid != agent_id]
+        others_points = [
+            int(st.get("points", 0)) for aid, st in states.items() if aid != agent_id
+        ]
         if not others_points:
             return 0
         max_other = max(others_points)
@@ -210,7 +214,6 @@ class PulsedWolfAgent:
         pool_gold: int,
         prev_pool_buys: Dict[str, Any],
     ) -> (Dict[str, int], int):
-
         # 1) Round + progress
         self.round_counter += 1
         current_round = self.round_counter
@@ -243,7 +246,7 @@ class PulsedWolfAgent:
 
         # 5) Round budget
         if endgame:
-            round_budget = gold   # full flush in endgame
+            round_budget = gold  # full flush in endgame
         else:
             round_budget = clamp_int(gold * spend_frac, 1, gold)
 
@@ -317,13 +320,16 @@ class PulsedWolfAgent:
 # API hook
 # ------------------------------------------------------------
 
+
 def make_bid(
     agent_id: str,
+    round: int,
     states: Dict[str, Any],
     auctions: Dict[str, Any],
     prev_auctions: Dict[str, Any],
     pool_gold: int,
     prev_pool_buys: Dict[str, Any],
+    bank_state: Dict,
 ) -> Dict[str, Any]:
     """
     Entry point for dnd_auction_game.
@@ -347,7 +353,7 @@ def make_bid(
 # ------------------------------------------------------------
 
 if __name__ == "__main__":
-    host = "localhost"
+    host = "opentsetlin.com"
     agent_name = "Wolf_of_Wall_Street_Pulsed_Cap_Pool"
     player_id = "Maximilian Eckstein"
     port = 8000
@@ -363,3 +369,4 @@ if __name__ == "__main__":
     except KeyboardInterrupt:
         print("<interrupt>")
     print("<game done>")
+
