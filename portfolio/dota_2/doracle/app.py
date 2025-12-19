@@ -5,12 +5,13 @@
 from __future__ import annotations
 
 import json
+import pickle
 import sys
 from functools import lru_cache
 from pathlib import Path
 from typing import Any, Dict, List
 
-import numpy as np  # <-- neu für ML Prediction
+import numpy as np
 import pandas as pd
 from flask import Flask, render_template, request, jsonify, url_for
 
@@ -18,13 +19,16 @@ from flask import Flask, render_template, request, jsonify, url_for
 # Paths & Python import setup
 # -------------------------------------------------------------------------------
 
-PACKAGE_DIR = Path(__file__).resolve().parent
-PROJECT_ROOT = PACKAGE_DIR.parent
+PACKAGE_DIR = Path(__file__).resolve().parent          # .../portfolio/dota_2/doracle
+PROJECT_ROOT = PACKAGE_DIR.parent                      # .../portfolio/dota_2
+
 DATA_DIR = PROJECT_ROOT / "data"
 SRC_DIR = PROJECT_ROOT / "src"
 
-if str(SRC_DIR) not in sys.path:
-    sys.path.insert(0, str(SRC_DIR))
+# ensure src is importable
+sp = str(SRC_DIR)
+if sp not in sys.path:
+    sys.path.insert(0, sp)
 
 from draft_engine import recommend_pick, recommend_ban  # type: ignore
 
@@ -43,8 +47,10 @@ debug_mode = True
 # ML Prediction Helpers
 # -------------------------------------------------------------------------------
 
+
 def sigmoid(z):
     return 1 / (1 + np.exp(-z))
+
 
 def predict_single_value(theta, input_vector):
     bias = theta[0]
@@ -52,66 +58,95 @@ def predict_single_value(theta, input_vector):
     linear = bias + np.dot(input_vector, weight)
     return sigmoid(linear)
 
+
 def get_theta():
     theta_path = DATA_DIR / "theta_model.npz"
     data = np.load(theta_path)
     return data["theta"]
 
+
 # -------------------------------------------------------------------------------
 # Template renders
 # -------------------------------------------------------------------------------
+
 
 @app.route("/")
 def index():
     return render_template("index.html", heroes=get_heroes())
 
+
 @app.route("/explore")
 def explore():
     return render_template("explore.html", heroes=get_heroes())
 
+
 # -------------------------------------------------------------------------------
 # Drafting APIs
 # -------------------------------------------------------------------------------
+
 
 @app.route("/radiant_pick", methods=["POST"])
 def radiant_pick():
     data = request.get_json(force=True) or {}
     radiant = data.get("radiant", [])
     dire = data.get("dire", [])
+    radiant_ban = data.get("radiant_ban", [])
+    dire_ban = data.get("dire_ban", [])
     top_n = int(data.get("top_n", 5))
-    ranked, warnings = recommend_pick(radiant, dire, top_n=top_n)
+    ranked, warnings = recommend_pick(radiant, dire, radiant_ban, dire_ban, top_n=top_n)
     return jsonify({"picks": ranked, "warnings": warnings})
+
 
 @app.route("/radiant_ban", methods=["POST"])
 def radiant_ban():
     data = request.get_json(force=True) or {}
     radiant = data.get("radiant", [])
     dire = data.get("dire", [])
-    top_n = int(data.get("top_n", 5))
-    ranked, warnings = recommend_ban(radiant, dire, top_n=top_n)
+    radiant_ban = data.get("radiant_ban", [])
+    dire_ban = data.get("dire_ban", [])
+    top_n = int(data.get("top_n", 7))
+    ranked, warnings = recommend_ban(radiant, dire, radiant_ban, dire_ban, top_n=top_n)
     return jsonify({"bans": ranked, "warnings": warnings})
+
 
 @app.route("/dire_pick", methods=["POST"])
 def dire_pick():
     data = request.get_json(force=True) or {}
     radiant = data.get("radiant", [])
     dire = data.get("dire", [])
+    radiant_ban = data.get("radiant_ban", [])
+    dire_ban = data.get("dire_ban", [])
     top_n = int(data.get("top_n", 5))
-    ranked, warnings = recommend_pick(dire, radiant, top_n=top_n)
+    ranked, warnings = recommend_pick(dire, radiant, dire_ban, radiant_ban, top_n=top_n)
     return jsonify({"picks": ranked, "warnings": warnings})
+
 
 @app.route("/dire_ban", methods=["POST"])
 def dire_ban():
     data = request.get_json(force=True) or {}
     radiant = data.get("radiant", [])
     dire = data.get("dire", [])
-    top_n = int(data.get("top_n", 5))
-    ranked, warnings = recommend_ban(dire, radiant, top_n=top_n)
+    radiant_ban = data.get("radiant_ban", [])
+    dire_ban = data.get("dire_ban", [])
+    top_n = int(data.get("top_n", 7))
+    ranked, warnings = recommend_ban(dire, radiant, dire_ban, radiant_ban, top_n=top_n)
     return jsonify({"bans": ranked, "warnings": warnings})
+
+
+@app.route("/stats/<int:hero_id>")
+def hero_stats(hero_id: int):
+    df = get_hero_analysis()
+    hero_row = df[df["hero_id"] == hero_id]
+    if hero_row.empty:
+        return jsonify({"error": "Hero not found"}), 404
+    hero_data: Dict[str, Any] = hero_row.to_dict(orient="records")[0]  # type: ignore
+    return jsonify(hero_data)
+
 
 # -------------------------------------------------------------------------------
 # Winner Prediction API (neu)
 # -------------------------------------------------------------------------------
+
 
 @app.route("/predict_winner", methods=["POST"])
 def predict_winner():
@@ -119,22 +154,42 @@ def predict_winner():
     radiant_team: List[int] = data.get("radiant", [])
     dire_team: List[int] = data.get("dire", [])
 
+    # Feature vector length must match the training setup
+    # (In our case: number of heroes in heroes.json)
     num_heroes = len(get_heroes())
-    x = np.zeros(num_heroes)
+    x = np.zeros(num_heroes, dtype=float)
+
+    # Load hero-id → feature-index mapping using an absolute path
+    # (robust against different working directories)
+    mapping_path = DATA_DIR / "heroes_mapping.pkl"
+    with open(mapping_path, "rb") as f:
+        mapping = pickle.load(f)
+
+    hero_id_to_index = mapping["hero_id_to_index"]
+
+    # The mapping uses 1-based indices → convert to 0-based feature indices
     for hid in radiant_team:
-        x[hid - 1] = 1
+        idx = hero_id_to_index.get(str(hid), hero_id_to_index.get(hid))
+        if idx is not None:
+            x[int(idx) - 1] = 1.0
+
     for hid in dire_team:
-        x[hid - 1] = -1
+        idx = hero_id_to_index.get(str(hid), hero_id_to_index.get(hid))
+        if idx is not None:
+            x[int(idx) - 1] = 1.0
 
     theta = get_theta()
-    prob_radiant = predict_single_value(theta, x)
-    prob_dire = 1 - prob_radiant
+    prob_radiant = float(predict_single_value(theta, x))
+    prob_dire = float(1.0 - prob_radiant)
 
-    return jsonify({"radiant": float(prob_radiant), "dire": float(prob_dire)})
+    return jsonify({"radiant": prob_radiant, "dire": prob_dire})
+
+
 
 # -------------------------------------------------------------------------------
 # Helpers (heroes + hero_analysis)
 # -------------------------------------------------------------------------------
+
 
 @lru_cache(maxsize=1)
 def get_heroes() -> Dict[int, Dict[str, Any]]:
@@ -159,6 +214,7 @@ def get_heroes() -> Dict[int, Dict[str, Any]]:
         raise ValueError("Unsupported heroes.json format")
     return by_id
 
+
 @lru_cache(maxsize=1)
 def get_hero_analysis() -> pd.DataFrame:
     path = DATA_DIR / "hero_analysis.csv"
@@ -170,6 +226,7 @@ def get_hero_analysis() -> pd.DataFrame:
             except Exception:
                 df[col] = df[col].apply(eval)
     return df
+
 
 # -------------------------------------------------------------------------------
 # Dev entry point

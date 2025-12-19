@@ -100,3 +100,141 @@ textarea {
     cursor: pointer;
 }
 
+.hero-ban-radiant,
+.hero-ban-dire {
+    margin-top: 8px;
+}
+
+.oracle-output-img {
+    width: 100%;
+    max-width: 120px;
+    height: auto;
+    border: 2px solid #ccc;
+    border-radius: 6px;
+    padding: 3px;
+    background-color: #eee;
+}
+
+.heroview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); 
+    grid-gap: 10px;
+}
+
+.hero-box {
+    width: 110px;          /* controls how big each tile is */
+    height: 85px;
+    border: 1px solid #444;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #222;
+}
+
+.hero-image img {
+    width: 110px;
+    height: 60px;
+    object-fit: cover;
+}
+
+.hero-name {
+    font-size: 12px;
+    padding: 2px 0;
+}
+
+/* Modern Output Card */
+.winner-box {
+    background: rgba(255, 255, 255, 0.12);
+    backdrop-filter: blur(12px);
+    border-radius: 12px;
+    padding: 18px 22px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+    color: #fff;
+    font-family: "Inter", sans-serif;
+}
+
+.winner-title {
+    margin: 0 0 6px 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: #e6e6e6;
+}
+
+.winner-text {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 400;
+    color: #cfcfcf;
+}
+/* -------------------------
+   Explore Page Output Modernization (row-fill with numbers)
+---------------------------- */
+
+/* Container for best/worst matchups */
+#bestMatchups, #worstCounters {
+    display: flex;
+    gap: 5px;
+}
+
+/* Each matchup/counter box */
+#bestMatchups div, #worstCounters div {
+    flex: 1;                    /* grow equally to fill the row */
+    display: flex;               /* vertical layout inside */
+    flex-direction: column;      /* image on top, number below */
+    align-items: center;         /* center content horizontally */
+    text-align: center;
+    background: rgba(255, 255, 255, 0.08);
+    padding: 4px;
+    border-radius: 6px;
+}
+
+/* Images inside each box */
+#bestMatchups img, #worstCounters img {
+    width: 100%;                
+    height: auto;               
+    border-radius: 6px;
+    object-fit: cover;
+    margin-bottom: 4px;        
+}
+
+/* Number/text under each image */
+#bestMatchups div div, #worstCounters div div {
+    font-size: 13px;
+    font-weight: 500;
+    color: #fff;
+}
+
+/* Other hero details (like best teammate) */
+#otherDetails img {
+    width: 60px;
+    height: auto;
+    border-radius: 6px;
+    object-fit: cover;
+    vertical-align: middle;
+    margin-right: 6px;
+}
+.matchup-box {
+    display: flex;
+    flex-direction: column;  /* stack name -> image -> value */
+    align-items: center;
+    margin-right: 6px;
+    margin-bottom: 6px;
+}
+
+.matchup-name {
+    font-size: 12px;
+    font-weight: 600;
+    color: #000; /* change to #fff if dark background */
+    margin-bottom: 2px;
+    text-align: center;
+}
+
+.matchup-value {
+    font-size: 12px;
+    font-weight: 500;
+    color: #000; /* change to #fff if dark background */
+    margin-top: 2px;
+    text-align: center;
+}
+
+

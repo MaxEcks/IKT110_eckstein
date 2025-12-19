@@ -28,6 +28,7 @@ VALID_HEROES: set[int] = set(df["hero_id"].astype(int).tolist())
 # Helper functions
 # ------------------------------------------------------
 
+
 def validate_team(team: Iterable[Any]) -> Tuple[List[int], List[Any]]:
     """
     Take a list of hero_ids (or strings) from the app and:
@@ -60,7 +61,10 @@ def validate_team(team: Iterable[Any]) -> Tuple[List[int], List[Any]]:
 # Scoring functions (heuristics)
 # ------------------------------------------------------
 
-def calculate_pick_score(hero_id: int, my_team: List[int], enemy_team: List[int]) -> float:
+
+def calculate_pick_score(
+    hero_id: int, my_team: List[int], enemy_team: List[int]
+) -> float:
     """
     Heuristic score for how good hero_id is as the next pick for my_team.
 
@@ -106,7 +110,9 @@ def calculate_pick_score(hero_id: int, my_team: List[int], enemy_team: List[int]
     return float(score)
 
 
-def calculate_ban_score(hero_id: int, my_team: List[int], enemy_team: List[int]) -> float:
+def calculate_ban_score(
+    hero_id: int, my_team: List[int], enemy_team: List[int]
+) -> float:
     """
     Heuristic score for how important it is to ban hero_id.
 
@@ -134,11 +140,7 @@ def calculate_ban_score(hero_id: int, my_team: List[int], enemy_team: List[int])
     # Base strength from winrate
     base_strength = winrate * 0.4
 
-    ban_score = (
-        strong_against_us * 2.0
-        + enemy_synergy * 1.5
-        + base_strength
-    )
+    ban_score = strong_against_us * 2.0 + enemy_synergy * 1.5 + base_strength
     return float(ban_score)
 
 
@@ -146,9 +148,12 @@ def calculate_ban_score(hero_id: int, my_team: List[int], enemy_team: List[int])
 # Recommendation API for the web app
 # ------------------------------------------------------
 
+
 def recommend_pick(
     raw_my_team: Iterable[Any],
     raw_enemy_team: Iterable[Any],
+    raw_my_ban,
+    raw_enemy_ban,
     top_n: int = 5,
 ) -> Tuple[List[Tuple[int, float]], Dict[str, List[Any]]]:
     """
@@ -162,7 +167,10 @@ def recommend_pick(
       }
     """
     my_team, my_invalid = validate_team(raw_my_team)
+    my_ban, my_invalid_ban = validate_team(raw_my_ban)
+
     enemy_team, enemy_invalid = validate_team(raw_enemy_team)
+    enemy_ban, enemy_invalid_ban = validate_team(raw_enemy_ban)
 
     warnings: Dict[str, List[Any]] = {}
     if my_invalid:
@@ -174,7 +182,7 @@ def recommend_pick(
     for hero_id in df["hero_id"]:
         hid = int(hero_id)
         # Do not recommend heroes that are already in my team
-        if hid in my_team:
+        if hid in my_team or hid in enemy_team or hid in my_ban or hid in enemy_ban:
             continue
         scores[hid] = calculate_pick_score(hid, my_team, enemy_team)
 
@@ -185,6 +193,8 @@ def recommend_pick(
 def recommend_ban(
     raw_my_team: Iterable[Any],
     raw_enemy_team: Iterable[Any],
+    raw_my_ban,
+    raw_enemy_ban,
     top_n: int = 5,
 ) -> Tuple[List[Tuple[int, float]], Dict[str, List[Any]]]:
     """
@@ -194,7 +204,10 @@ def recommend_ban(
     Also returns a warnings dict with invalid IDs.
     """
     my_team, my_invalid = validate_team(raw_my_team)
+    my_ban, my_invalid_ban = validate_team(raw_my_ban)
+
     enemy_team, enemy_invalid = validate_team(raw_enemy_team)
+    enemy_ban, enemy_invalid_ban = validate_team(raw_enemy_ban)
 
     warnings: Dict[str, List[Any]] = {}
     if my_invalid:
@@ -205,8 +218,9 @@ def recommend_ban(
     scores: Dict[int, float] = {}
     for hero_id in df["hero_id"]:
         hid = int(hero_id)
+        if hid in my_team or hid in enemy_team or hid in my_ban or hid in enemy_ban:
+            continue
         scores[hid] = calculate_ban_score(hid, my_team, enemy_team)
-
     ranked = sorted(scores.items(), key=lambda x: x[1], reverse=True)
     return ranked[:top_n], warnings
 
@@ -215,32 +229,34 @@ def recommend_ban(
 # Small module test
 # ------------------------------------------------------
 
-if __name__ == "__main__":
-    # Example teams (just for quick local testing)
-    example_my_team = [36, 99]   # replace with real hero_ids
-    example_enemy_team = [98, 33]
-
-    print("=== Drafting Engine Smoke Test ===")
-    print(f"My team:      {example_my_team}")
-    print(f"Enemy team:   {example_enemy_team}")
-    print()
-
-    top_picks, pick_warnings = recommend_pick(example_my_team, example_enemy_team, top_n=5)
-    top_bans, ban_warnings = recommend_ban(example_my_team, example_enemy_team, top_n=5)
-
-    print("Top pick recommendations (hero_id, score):")
-    for hero_id, score in top_picks:
-        print(f"  {hero_id:3d}  ->  {score:.4f}")
-
-    print()
-    print("Top ban recommendations (hero_id, score):")
-    for hero_id, score in top_bans:
-        print(f"  {hero_id:3d}  ->  {score:.4f}")
-
-    if pick_warnings or ban_warnings:
-        print()
-        print("Warnings:")
-        if pick_warnings:
-            print("  Pick warnings:", pick_warnings)
-        if ban_warnings:
-            print("  Ban warnings:", ban_warnings)
+# if __name__ == "__main__":
+#    # Example teams (just for quick local testing)
+#    example_my_team = [36, 99]  # replace with real hero_ids
+#    example_enemy_team = [98, 33]
+#
+#    print("=== Drafting Engine Smoke Test ===")
+#    print(f"My team:      {example_my_team}")
+#    print(f"Enemy team:   {example_enemy_team}")
+#    print()
+#
+#    top_picks, pick_warnings = recommend_pick(
+#        example_my_team, example_enemy_team, top_n=5
+#    )
+#    top_bans, ban_warnings = recommend_ban(example_my_team, example_enemy_team, top_n=5)
+#
+#    print("Top pick recommendations (hero_id, score):")
+#    for hero_id, score in top_picks:
+#        print(f"  {hero_id:3d}  ->  {score:.4f}")
+#
+#    print()
+#    print("Top ban recommendations (hero_id, score):")
+#    for hero_id, score in top_bans:
+#        print(f"  {hero_id:3d}  ->  {score:.4f}")
+#
+#    if pick_warnings or ban_warnings:
+#        print()
+#        print("Warnings:")
+#        if pick_warnings:
+#            print("  Pick warnings:", pick_warnings)
+#        if ban_warnings:
+#            print("  Ban warnings:", ban_warnings)

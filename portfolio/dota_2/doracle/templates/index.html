@@ -5,24 +5,60 @@
 <div class="row">
     <div class="col">
         <h3 class="font-weight-light">Radiant</h3>
+
+        <!-- Radiant Picks -->
         {% for i in range(5) %}
         <div class="p-0 d-inline">
-            <img id="radiant-{{i}}" src="{{ url_for('static', filename='img/placeholder.png')}}"
-                class="hero-pool hero-pool-radiant img-responsive" data-heroid="-1">
+            <img id="radiant-{{i}}" 
+                 src="{{ url_for('static', filename='img/placeholder.png')}}"
+                 class="hero-pool hero-pool-radiant img-responsive"
+                 data-heroid="-1">
+        </div>
+        {% endfor %}
+
+        <br>
+
+        <!-- Radiant Bans -->
+        {% for i in range(7) %}
+        <div class="p-0 d-inline">
+            <img id="radiant-ban-{{i}}" 
+                 src="{{ url_for('static', filename='img/placeholder.png')}}"
+                 class="hero-pool hero-ban-radiant img-responsive"
+                 data-heroid="-1">
         </div>
         {% endfor %}
     </div>
+
+
     <div class="col">
         <h3 class="font-weight-light">Dire</h3>
+
+        <!-- Dire Picks -->
         {% for i in range(5) %}
         <div class="p-0 d-inline">
-            <img id="dire-{{i}}" src="{{ url_for('static', filename='img/placeholder.png')}}"
-                class="hero-pool hero-pool-dire img-responsive" data-heroid="-1" >
+            <img id="dire-{{i}}" 
+                 src="{{ url_for('static', filename='img/placeholder.png')}}"
+                 class="hero-pool hero-pool-dire img-responsive"
+                 data-heroid="-1">
+        </div>
+        {% endfor %}
+
+        <br>
+
+        <!-- Dire Bans -->
+        {% for i in range(7) %}
+        <div class="p-0 d-inline">
+            <img id="dire-ban-{{i}}" 
+                 src="{{ url_for('static', filename='img/placeholder.png')}}"
+                 class="hero-pool hero-ban-dire img-responsive"
+                 data-heroid="-1">
         </div>
         {% endfor %}
     </div>
 </div>
+
 <hr class="my-4">
+
 <div class="row">
     <div class="col-8">
         <div class="heroview">
@@ -42,7 +78,9 @@
                         <img src="{{ url_for('static', filename=hero.image) }}"
                             width="90px" height="50px" alt="{{hero['name']}}">
                     </div>
-                    <div class="hero-name text-center bg-dark text-white noselect">{{hero['name']}}
+
+                    <div class="hero-name text-center bg-dark text-white noselect">
+                        {{hero['name']}}
                     </div>
 
                 </div>
@@ -51,17 +89,41 @@
         </div>
     </div>
     <div class="col-4">
-        <div class="row">
-            <!-- Updated Buttons -->
-            <button id="radiantPickBtn" type="button" class="btn btn-primary m-1">Radiant Pick</button>
-            <button id="radiantBanBtn" type="button" class="btn btn-secondary m-1">Radiant Ban</button>
-            <button id="direPickBtn" type="button" class="btn btn-success m-1">Dire Pick</button>
-            <button id="direBanBtn" type="button" class="btn btn-danger m-1">Dire Ban</button>
-            <button id="predictWinnerBtn" type="button" class="btn btn-outline-dark m-1">Predict Winner</button>
+
+        <!-- Better Button Group -->
+        <div class="btn-group mb-3 w-100" role="group">
+            <button id="radiantPickBtn" type="button" class="btn btn-primary">Radiant Pick</button>
+            <button id="radiantBanBtn" type="button" class="btn btn-secondary">Radiant Ban</button>
+            <button id="direPickBtn" type="button" class="btn btn-success">Dire Pick</button>
+            <button id="direBanBtn" type="button" class="btn btn-danger">Dire Ban</button>
         </div>
 
-        <div class="row">
-            <textarea id="outputOracle" rows="30" class="m-1" ></textarea>
+        <button id="predictWinnerBtn" type="button" class="btn btn-dark w-100 mb-3">
+            Predict Winner
+        </button>
+        <!--Image output for the prediction-->
+        <div class="row mt-3">
+            {% for i in range(3) %}
+            <div class="col-4 text-center">
+                <img id="oracle-output-{{i}}"
+                    src="{{ url_for('static', filename='img/placeholder.png')}}"
+                    class="img-fluid oracle-output-img"
+                    data-heroid="-1">
+            </div>
+            {% endfor %}
+        </div>
+        <div class="row mt-3">
+            {% for i in range(3) %}
+            <div class="col-4 text-center">
+                <img id="oracle-ban-output-{{i}}"
+                    src="{{ url_for('static', filename='img/placeholder.png')}}"
+                    class="img-fluid oracle-output-img"
+                    data-heroid="-1">
+            </div>
+            {% endfor %}
+        </div>        <div id="winner-result-box" class="winner-box mt-4">
+           <h5 class="winner-title">Prediction Result</h5>
+            <p id="winner-result-text" class="winner-text">No prediction yet.</p>
         </div>
     </div>
 </div>
@@ -69,6 +131,6 @@
 {% endblock %}
 
 {% block scripts %} 
-
 <script src="{{url_for('static', filename='js/oracle.js')}}"></script>
 {% endblock %}
+

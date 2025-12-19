@@ -3,8 +3,9 @@
 {% block content %}
 
 <div class="row">
+    <!-- Hero selection grid -->
     <div class="col-8">
-        <div class="heroview">
+        <div class="heroview d-flex flex-wrap gap-2">
             {% for hero_id, hero in heroes.items() %}
             <div class="hero-box">
                 <div class="wrapper">
@@ -12,16 +13,30 @@
                         <img src="{{ url_for('static', filename=hero.image) }}"
                             width="90px" height="50px" alt="{{hero['name']}}">
                     </div>
-                    <div class="hero-name text-center bg-dark text-white noselect">{{hero['name']}}
+                    <div class="hero-name text-center bg-dark text-white noselect">
+                        {{hero['name']}}
                     </div>
-
                 </div>
             </div>
             {% endfor %}
         </div>
     </div>
+
+    <!-- Modern hero stats display -->
     <div class="col-4">
-        <textarea id="outputExplore" class="m-1"></textarea>
+        <div id="outputExplore" class="hero-stats p-3 border rounded bg-light">
+            <div id="heroTitle" class="text-center fs-5 fw-bold mb-2">Click a hero to see stats</div>
+            <div id="heroDetails"></div>
+            <div class="mt-2">
+                <div><strong>Best Matchups:</strong></div>
+                <div id="bestMatchups" class="d-flex flex-wrap gap-1"></div>
+            </div>
+            <div class="mt-2">
+                <div><strong>Worst Counters:</strong></div>
+                <div id="worstCounters" class="d-flex flex-wrap gap-1"></div>
+            </div>
+            <div class="mt-2" id="otherDetails"></div>
+        </div>
     </div>
 </div>
 
@@ -29,4 +44,65 @@
 
 {% block scripts %} 
 <script src="{{url_for('static', filename='js/explore.js')}}"></script>
+
+<script>
+const heroesData = {{ heroes.values() | list | tojson }};
+let heroesMap = {};
+heroesData.forEach(h => { heroesMap[h.id.toString()] = h; }); // string keys
+
+
+
+// --- Your click handler below ---
+$(document).ready(function () {
+
+    $(".hero-image").click(function () {
+        let hero_id = $(this).data("heroid");
+        let url = `/stats/${hero_id}`; 
+        $.get(url, function (data) {
+
+            $("#heroTitle").text(heroesMap[hero_id].name + " Stats");
+
+            let otherHtml = `
+                <div>Pick rate: ${(data.pickrate*100).toFixed(1)}%</div>
+                <div>Win rate: ${(data.winrate*100).toFixed(1)}%</div>
+                <div>
+                    Best teammate: 
+                    <img src="static/img/avatar-sb/${data.best_teammate}.png" width="40" height="25">
+                    ${heroesMap[data.best_teammate].name} — Synergy: ${data.best_teammate_synergy.toFixed(2)}
+                </div>
+            `;
+            $("#otherDetails").html(otherHtml);
+
+            let bestHtml = "";
+            data.best_matchups.forEach(item => {
+                let id = item[0];
+                let val = item[1];
+                bestHtml += `
+                    <div class="matchup-box text-center">
+                        <div class="matchup-name">${heroesMap[id].name}</div>
+                        <img src="static/img/avatar-sb/${id}.png" width="40" height="25">
+                        <div class="matchup-value">${val.toFixed(3)}</div>
+                    </div>
+                `;
+            });
+            $("#bestMatchups").html(bestHtml);
+
+            let worstHtml = "";
+            data.worst_counters.forEach(item => {
+                let id = item[0];
+                let val = item[1];
+                worstHtml += `
+                    <div class="matchup-box text-center">
+                        <img src="static/img/avatar-sb/${id}.png" width="40" height="25">
+                        <div class="matchup-name">${heroesMap[id].name}</div>
+                        <div class="matchup-value">${val.toFixed(3)}</div>
+                    </div>
+                `;
+            });
+            $("#worstCounters").html(worstHtml);
+        });
+    });
+});
+</script>
 {% endblock %}
+
